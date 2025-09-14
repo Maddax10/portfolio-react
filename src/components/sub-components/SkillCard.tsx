@@ -1,13 +1,23 @@
 import { useEffect } from "react";
-
+/** 
+ * Création d'un type d'objet
+ */
 type SkillCard = {
   title: string,
   description: string,
   path: string,
   alt: string
 }
+/**
+ * initialisation des propriétés de ma card
+ */
 type Props = { skillCard: SkillCard };
 
+/**
+ * 
+ * @param props SkillCard(title:string, description:string, path:string, alt:string)
+ * @returns html component
+ */
 export function SkillCard(props: Props) {
   const { skillCard } = props;
 

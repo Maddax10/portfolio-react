@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react'
 import '../styles/Skills.scss'
 import { SkillCard } from './sub-components/SkillCard'
 
+/**
+ * Pour chaque Skill, creation d'une card avec les infos contenus dans le useState img
+ */
 export const Skills = () => {
 
     const [img] = useState([

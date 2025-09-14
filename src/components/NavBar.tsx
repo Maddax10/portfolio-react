@@ -1,22 +1,18 @@
 import { useEffect } from "react"
+import { NavBarLogo } from "./sub-components/NavBarLogo"
 import '../styles/NavBar.scss'
 export const NavBar = () => {
     useEffect(() => {
-        console.log("NavBar component Created");
+        console.log("⏫NavBar component Created⏫");
     },
         []
     )
     return (
         <>
             <nav className="nav">
-                <input type="checkbox" id="trigger" className="nav__trigger" />
-                <label htmlFor="trigger" className="nav__logo">
+                <NavBarLogo />
 
-                    <span className="nav__icon"></span>
-                    <span className="nav__icon"></span>
-                    <span className="nav__icon"></span>
-
-                </label>
+                {/* Nav mobile */}
                 <ul className="nav__navMobile">
                     <li><a href="#intro">Home</a></li>
                     <li><a href="#skills">Skills</a></li>
@@ -24,6 +20,8 @@ export const NavBar = () => {
                     <li><a href="#about">À propos</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
+
+                {/* Nav desktop */}
                 <ul className="nav__navDesktop hidden">
                     <li><a href="#index" className="activePage">Home</a></li>
                     <li><a href="#skills">Skills</a></li>

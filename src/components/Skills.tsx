@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import '../styles/Skills.scss'
 import { SkillCard } from './sub-components/SkillCard'
+import '../styles/Skills.scss'
 
 /**
  * Pour chaque Skill, creation d'une card avec les infos contenus dans le useState img
@@ -19,13 +19,11 @@ export const Skills = () => {
     ]);
 
     useEffect(() => {
-        console.log("Skills component")
-    }, [])
-
-    useEffect(() => {
-        console.log("useState(imgArray[SkillData])")
+        console.log("   useState(imgArray[SkillData])")
     }, [img])
-    //Path and Alt for img balise
+    useEffect(() => {
+        console.log("⏫Skills component⏫")
+    }, [])
 
     return (
         <section className="skills" id="skills">

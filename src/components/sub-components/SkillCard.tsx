@@ -22,7 +22,7 @@ export function SkillCard(props: Props) {
   const { skillCard } = props;
 
   useEffect(() => {
-    console.log("SkillCard Sub-component")
+    console.log("  SkillCard Sub-component")
   }, [])
 
   return (

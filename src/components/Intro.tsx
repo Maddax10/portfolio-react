@@ -2,7 +2,7 @@ import '../styles/Intro.scss'
 import { useEffect } from 'react'
 export const Intro = () => {
     useEffect(() => {
-        console.log("Intro component created")
+        console.log("⏫Intro component created⏫")
     }, [])
     return (
         <>

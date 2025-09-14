@@ -1,9 +1,9 @@
 
 import { NavBar } from './components/NavBar'
-
-import './App.css'
 import { Intro } from './components/Intro'
 import { Skills } from './components/Skills'
+import { Projects } from './components/Projects'
+import './App.css'
 
 const App = () => {
 
@@ -12,6 +12,7 @@ const App = () => {
       <NavBar />
       <Intro />
       <Skills />
+      <Projects />
     </>
   )
 }

@@ -20,7 +20,7 @@ export const Skills = () => {
     }, [])
 
     useEffect(() => {
-        console.log("useState(img)")
+        console.log("useState(imgArray[SkillData])")
     }, [img])
     //Path and Alt for img balise
 

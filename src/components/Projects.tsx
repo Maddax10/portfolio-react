@@ -6,10 +6,10 @@ import "../styles/Projects.scss";
 export const Projects = () => {
   const [projects] = useState([
     {
-      title: "Portfolio - vite.dev",
+      title: "Portfolio - Vite",
       description: "Mon premier vrai projet en Front-End",
       projectLink: "https://github.com/Maddax10/Portfolio-vite.dev",
-      imgPath: "portfolio-vite.dev.png",
+      imgPath: "portfolio.png",
       imgAlt: "Portfolio screen",
       skills: [SkillsLinks.HTML.path, SkillsLinks.SCSS.path, SkillsLinks.JAVASCRIPT.path, SkillsLinks.VITE_DEV.path],
     },
@@ -17,7 +17,7 @@ export const Projects = () => {
       title: "Portfolio - react",
       description: "Adaptation du portfolio Vite.dev en React",
       projectLink: "https://github.com/Maddax10/portfolio-react",
-      imgPath: "portfolio-react.png",
+      imgPath: "portfolio.png",
       imgAlt: "Portfolio screen",
       skills: [
         SkillsLinks.HTML.path,

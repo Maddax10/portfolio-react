@@ -86,7 +86,7 @@
     background-color: var(--white60op);
   }
   &__projectLogo {
-    width: 10dvw;
+    width: 20%;
   }
   &__link {
     transition: ease 0.15s;
@@ -116,8 +116,7 @@
       padding: 2rem;
     }
     &__card {
-      width: 100%;
-      height: 100%;
+      width: 300px;
     }
   }
 }

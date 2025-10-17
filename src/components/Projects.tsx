@@ -1,38 +1,29 @@
-import { useEffect, useState } from "react";
-import { ProjectCard } from "./sub-components/ProjectCard";
-import { SkillsLinks } from "../Enums/SkillsEnum";
-import "../styles/Projects.scss";
+import { useEffect, useState } from 'react';
+import { ProjectCard } from './sub-components/ProjectCard';
+import { SkillsLinks } from '../Enums/SkillsEnum';
 
 export const Projects = () => {
   const [projects] = useState([
     {
-      title: "Portfolio - Vite",
-      description: "Mon premier vrai projet en Front-End",
-      projectLink: "https://github.com/Maddax10/Portfolio-vite.dev",
-      imgPath: "portfolio.png",
-      imgAlt: "Portfolio screen",
+      title: 'Portfolio - Vite',
+      description: 'Mon premier vrai projet en Front-End',
+      projectLink: 'https://github.com/Maddax10/Portfolio-vite.dev',
+      imgPath: 'portfolio.png',
+      imgAlt: 'Portfolio screen',
       skills: [SkillsLinks.HTML.path, SkillsLinks.SCSS.path, SkillsLinks.JAVASCRIPT.path, SkillsLinks.VITE_DEV.path],
     },
     {
-      title: "Portfolio - react",
-      description: "Adaptation du portfolio Vite.dev en React",
-      projectLink: "https://github.com/Maddax10/portfolio-react",
-      imgPath: "portfolio.png",
-      imgAlt: "Portfolio screen",
-      skills: [
-        SkillsLinks.HTML.path,
-        SkillsLinks.SCSS.path,
-        SkillsLinks.TYPESCRIPT.path,
-        SkillsLinks.VITE_DEV.path,
-        SkillsLinks.REACT.path,
-        SkillsLinks.NODE_JS.path,
-        SkillsLinks.NO_SQL.path,
-      ],
+      title: 'Portfolio - react',
+      description: 'Adaptation du portfolio Vite.dev en React',
+      projectLink: 'https://github.com/Maddax10/portfolio-react',
+      imgPath: 'portfolio.png',
+      imgAlt: 'Portfolio screen',
+      skills: [SkillsLinks.HTML.path, SkillsLinks.SCSS.path, SkillsLinks.TYPESCRIPT.path, SkillsLinks.VITE_DEV.path, SkillsLinks.REACT.path],
     },
   ]);
 
   useEffect(() => {
-    console.log("⏫Projects component⏫");
+    console.log('⏫Projects component⏫');
   }, []);
   return (
     <>

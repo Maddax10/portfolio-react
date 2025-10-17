@@ -1,4 +1,4 @@
-@use "sass:color";
+@use 'sass:color';
 
 $black: black;
 $white: white;
@@ -10,6 +10,11 @@ $lighterGray: color.adjust($black, $lightness: 25%);
 $sunrise: #ffa600;
 $transitionTime: 0.3s;
 $doubleTransitionTime: calc($transitionTime * 2);
+$mobile: 768px;
+$navHeight: 75px;
+$skillsPadding: 16px;
+$skillsGap: 8px;
+$skillsCardsPadding: 28px;
 
 :root {
   --black: #{$black};

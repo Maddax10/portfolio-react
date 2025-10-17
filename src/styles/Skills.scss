@@ -1,20 +1,22 @@
 .skills {
-  // background-color: var(--darkGray);
-  background-color: var(--darkGray);
-  display: grid;
+  background-color: $darkGray;
+  padding: $skillsPadding;
   width: 100%;
-
+  display: grid;
   &__title {
-    text-align: center;
+    padding-inline-start: 5rem;
     color: var(--sunrise);
-    margin-block-start: 2rem;
+    padding-block: 1rem;
     font-size: 3rem;
+    text-align: center;
   }
   &__cards {
-    display: grid;
-    justify-items: center;
-    gap: 0.5rem;
-    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: $skillsGap;
+    padding-block-end: 1rem;
+    flex-flow: wrap;
   }
 }
 .skill {
@@ -26,6 +28,7 @@
     align-items: center;
     background-color: var(--lightGray);
     color: var(--white);
+    max-width: calc($mobile/2) - $skillsCardsPadding;
     width: 100%;
     border-radius: 1rem;
 
@@ -47,6 +50,7 @@
     padding-inline-start: 1rem;
     h1 {
       margin-block-end: 0.35rem;
+      font-size: 1.5rem;
     }
     p {
       color: var(--white60op);
@@ -59,6 +63,7 @@
     padding: 1rem;
     //75% du border-radius de ma "__skillCard"
     border-radius: 0.75rem;
+    min-width: 50px;
 
     img {
       width: 100%;

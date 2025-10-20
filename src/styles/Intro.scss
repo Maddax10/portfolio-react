@@ -6,18 +6,19 @@
   align-items: center;
   justify-self: center;
 
-  width: 80%;
+  width: 100%;
 
   h1 {
-    font-size: 2rem;
-    color: var(--white);
+    text-align: center;
+    font-size: 3rem;
+    color: $white;
 
     span {
-      color: var(--sunrise);
+      color: $sunrise;
     }
   }
   :nth-child(2) {
-    color: var(--white);
+    color: $white;
     opacity: 50%;
   }
 }

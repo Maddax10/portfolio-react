@@ -11,14 +11,14 @@
   h1 {
     text-align: center;
     font-size: 3rem;
-    color: var(--white);
+    color: $white;
 
     span {
-      color: var(--sunrise);
+      color: $sunrise;
     }
   }
   :nth-child(2) {
-    color: var(--white);
+    color: $white;
     opacity: 50%;
   }
 }

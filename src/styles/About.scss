@@ -1,5 +1,5 @@
 .about {
-  background: var(--black);
+  background: $black;
   padding-block: 1rem;
 
   &__card {
@@ -11,19 +11,19 @@
   //  Image
   //==================================================
   &__image {
-    transition: ease var(--transitionTime);
+    transition: ease $transitionTime;
 
     display: grid;
     position: relative;
     border-radius: 100%;
-    box-shadow: 0 0 5px 2px var(--black), 0 0 0 5px var(--sunrise);
+    box-shadow: 0 0 5px 2px $black, 0 0 0 5px $sunrise;
     margin-block: 2rem;
-    border: 2px solid var(--black);
+    border: 2px solid $black;
     &:hover {
       transform: translateY(3px);
     }
     img {
-      transition: ease var(--transitionTime);
+      transition: ease $transitionTime;
 
       justify-self: center;
       width: 100%;
@@ -31,7 +31,7 @@
     }
   }
   &__imageOverlay {
-    transition: ease var(--transitionTime);
+    transition: ease $transitionTime;
 
     position: absolute;
     background-color: transparent;
@@ -46,13 +46,13 @@
   //  Title
   //==================================================
   &__title {
-    color: var(--sunrise);
+    color: $sunrise;
     text-align: center;
     font-size: 3rem;
   }
 
   &__description {
-    color: var(--white60op);
+    color: $white60op;
     text-align: justify;
     justify-self: center;
   }

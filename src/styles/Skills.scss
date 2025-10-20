@@ -4,7 +4,7 @@
   width: 100%;
   display: grid;
   &__title {
-    color: var(--sunrise);
+    color: $sunrise;
     padding-block: 1rem;
     font-size: 3rem;
     text-align: center;
@@ -20,28 +20,28 @@
 }
 .skill {
   &__card {
-    transition: ease var(--transitionTime);
+    transition: ease $transitionTime;
     padding: 0.5rem;
     display: grid;
     grid-template-columns: 0.4fr 1fr;
     align-items: center;
-    background-color: var(--lightGray);
-    color: var(--white);
+    background-color: $lightGray;
+    color: $white;
     max-width: calc($mobile/2) - $skillsCardsPadding;
     width: 100%;
     border-radius: 1rem;
 
     &:hover {
-      box-shadow: inset 0 0 3px 1px var(--lighterGray), 0 0 16px 1px var(--black);
+      box-shadow: inset 0 0 3px 1px $lighterGray, 0 0 16px 1px $black;
       transform: translateY(-3px);
       h1 {
-        transition: ease var(--transitionTime);
-        color: var(--sunrise);
+        transition: ease $transitionTime;
+        color: $sunrise;
       }
       .skills__logo {
-        transition: ease var(--transitionTime);
+        transition: ease $transitionTime;
 
-        box-shadow: inset 0 0 3px 0px var(--white60op), 0 0 3px 0px var(--black60op);
+        box-shadow: inset 0 0 3px 0px $white60op, 0 0 3px 0px $black60op;
       }
     }
   }
@@ -52,13 +52,13 @@
       font-size: 1.5rem;
     }
     p {
-      color: var(--white60op);
+      color: $white60op;
       padding-inline-start: 0.2rem;
       margin-block-end: 0.2rem;
     }
   }
   &__logo {
-    background-color: var(--lighterGray);
+    background-color: $lighterGray;
     padding: 1rem;
     //75% du border-radius de ma "__skillCard"
     border-radius: 0.75rem;

@@ -1,6 +1,6 @@
 export const Footer = () => {
   return (
-    <section className="footer" id="footer">
+    <section className="footer" id="informations">
       <div className="footer__contact">
         <h1>Informations</h1>
         <div className="footer__informations">

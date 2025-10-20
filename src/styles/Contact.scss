@@ -1,6 +1,6 @@
 .contact {
   &__card {
-    background-color: var(--sunrise);
+    background-color: $sunrise;
     padding: 1rem;
   }
   &__form {
@@ -8,7 +8,7 @@
     gap: 0.3rem;
     h1 {
       font-size: 3rem;
-      color: var(--black);
+      color: $black;
     }
     input,
     textarea,
@@ -18,7 +18,7 @@
     }
     input,
     textarea {
-      border: 2px solid black;
+      border: 2px solid $black;
       padding-inline: 1rem;
     }
     textarea {
@@ -28,16 +28,16 @@
       resize: vertical;
     }
     button {
-      transition: ease var(--transitionTime);
-      background-color: var(--darkGray);
-      color: var(--white);
-      box-shadow: 0 5px 2px 0 var(--lightGray);
+      transition: ease $transitionTime;
+      background-color: $darkGray;
+      color: $white;
+      box-shadow: 0 5px 2px 0 $lightGray;
       border: none;
       cursor: pointer;
       &:hover {
-        color: var(--sunrise);
+        color: $sunrise;
         transform: translateY(3px);
-        box-shadow: 0 2px 2px var(--darkGray), inset 0 0 0 1px var(--sunrise);
+        box-shadow: 0 2px 2px $darkGray, inset 0 0 0 1px $sunrise;
       }
     }
   }

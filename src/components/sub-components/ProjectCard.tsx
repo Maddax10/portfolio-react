@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 type ProjectCard = {
   title: string;
@@ -17,10 +17,10 @@ type Props = { project: ProjectCard };
 export const ProjectCard = (props: Props) => {
   const { project } = props;
   useEffect(() => {
-    console.log("project.skills", project.skills);
+    console.log('project.skills', project.skills);
   }, [project.skills]);
   useEffect(() => {
-    console.log("  ProjectCard sub-component");
+    console.log('  ProjectCard sub-component');
   }, []);
 
   return (
@@ -38,7 +38,7 @@ export const ProjectCard = (props: Props) => {
           ))}
         </div>
         <a className="projects__link" href={project.projectLink} target="_blank">
-          <img className="projects____githubLogo" src="open_link_in_new_tab.svg" alt="open the link in new tab" />
+          <img className="projects____githubLogo" src="/logos/open_link_in_new_tab.svg" alt="open the link in new tab" />
         </a>
       </div>
     </>

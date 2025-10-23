@@ -1,46 +1,39 @@
 import { useEffect } from 'react';
+import type { Project } from '../../stores/models/project';
 
-type ProjectCard = {
-  title: string;
-  description: string;
-  projectLink: string;
-  imgPath: string;
-  imgAlt: string;
-  skills: string[];
-};
-
-type Props = { project: ProjectCard };
+type Props = { project: Project };
 /**
  * @param props   title: string | description: string | projectLink: string | imgPath: string | imgAlt: string
  * @returns html component
  */
 export const ProjectCard = (props: Props) => {
-  const { project } = props;
-  useEffect(() => {
-    console.log('project.skills', project.skills);
-  }, [project.skills]);
-  useEffect(() => {
-    console.log('  ProjectCard sub-component');
-  }, []);
+	const { project } = props;
 
-  return (
-    <>
-      <div className="projects__card">
-        <h2 className="projects__title">{project.title}</h2>
-        {/* div obligatoire pour la box-shadow inset du screen */}
-        <div className="projects__divScreen">
-          <img className="projects__screen" src={project.imgPath} alt={project.imgAlt} />
-        </div>
-        <p className="projects__description">{project.description}</p>
-        <div className="projects__projectLogos">
-          {project.skills.map((imgPath, index) => (
-            <img className="projects__projectLogo" src={imgPath} alt="" key={index} />
-          ))}
-        </div>
-        <a className="projects__link" href={project.projectLink} target="_blank">
-          <img className="projects____githubLogo" src="/logos/open_link_in_new_tab.svg" alt="open the link in new tab" />
-        </a>
-      </div>
-    </>
-  );
+	useEffect(() => {
+		console.log('project', project);
+	}, [project]);
+	useEffect(() => {
+		console.log('  ProjectCard sub-component');
+	}, []);
+
+	return (
+		<>
+			<div className="projects__card">
+				<h2 className="projects__title">{project.title}</h2>
+				{/* div obligatoire pour la box-shadow inset du screen */}
+				<div className="projects__divScreen">
+					<img className="projects__screen" src={project.image_path} />
+				</div>
+				<p className="projects__description">{project.description}</p>
+				<div className="projects__projectLogos">
+					{project.skills.map((skill, index) => (
+						<img className="projects__projectLogo" src={skill.image_path.toString()} alt={skill.name.toString()} key={index} />
+					))}
+				</div>
+				<a className="projects__link" href={project.github} target="_blank">
+					<img className="projects____githubLogo" src="/logos/open_link_in_new_tab.svg" alt="open the link in new tab" />
+				</a>
+			</div>
+		</>
+	);
 };

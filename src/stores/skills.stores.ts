@@ -26,7 +26,7 @@ export const useSkillsStore = create<skillsState>((set) => ({
 			const data: Skill[] = await resp.json();
 			set({ skills: data, error: null });
 		} catch {
-			set({ error: 'Erreur de chargement store' });
+			set({ error: 'Erreur de chargement des skills' });
 		} finally {
 			set({ loading: false });
 		}

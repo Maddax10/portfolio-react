@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { SkillCard } from './sub-components/SkillCard';
 import { useSkillsStore } from '../stores/skills.stores';
+import { loading } from './sub-components/Loading';
+import { loadingError } from './sub-components/LoadingError';
 
 /**
  * Pour chaque Skill, creation d'une card avec les infos contenus dans le useState img
@@ -21,6 +23,7 @@ export const Skills = () => {
 			<h1 className="skills__title">Skills</h1>
 			{/* ____cards____ */}
 			<div className="skills__cards">
+				{skillStore.loading === true ? loading() : skillStore.error ? loadingError() : ''}
 				{skillStore.skills.map((skill, index) => (
 					<SkillCard key={index} skill={skill} />
 				))}

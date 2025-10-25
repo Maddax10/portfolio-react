@@ -1,5 +1,6 @@
 .projects {
-	display: grid;
+	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	gap: 0.5rem;
@@ -112,7 +113,6 @@
 		&__cards {
 			flex-direction: row;
 			justify-content: center;
-			padding: 2rem;
 			// background-color: red;
 			flex-flow: row wrap;
 			height: 100%;

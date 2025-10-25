@@ -1,6 +1,14 @@
 .loading {
 	color: $white;
+	background-color: $white90op;
+	padding: 32px;
+	border-radius: 16px;
+	width: 100%;
 }
 .error {
 	color: $red;
+	background-color: $red90op;
+	padding: 32px;
+	border-radius: 16px;
+	width: 100%;
 }

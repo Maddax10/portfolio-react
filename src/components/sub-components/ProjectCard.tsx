@@ -10,7 +10,7 @@ export const ProjectCard = (props: Props) => {
 	const { project } = props;
 
 	useEffect(() => {
-		console.log('project', project);
+		// console.log('project', project);
 	}, [project]);
 
 	useEffect(() => {

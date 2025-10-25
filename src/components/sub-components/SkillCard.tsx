@@ -1,17 +1,12 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
+import type { Skill } from '../../stores/models/skill';
 /**
  * Création d'un type d'objet
  */
-type SkillCard = {
-  title: string;
-  description: string;
-  path: string;
-  alt: string;
-};
 /**
  * initialisation des propriétés de ma card
  */
-type Props = { skillCard: SkillCard };
+type Props = { skill: Skill };
 
 /**
  *
@@ -19,21 +14,21 @@ type Props = { skillCard: SkillCard };
  * @returns html component
  */
 export function SkillCard(props: Props) {
-  const { skillCard } = props;
+	const { skill } = props;
 
-  useEffect(() => {
-    console.log("  SkillCard Sub-component");
-  }, []);
+	useEffect(() => {
+		console.log('  SkillCard Sub-component');
+	}, []);
 
-  return (
-    <div className="skill__card">
-      <div className="skill__logo">
-        <img src={skillCard.path} alt={skillCard.alt} />
-      </div>
-      <article className="skill__text">
-        <h1>{skillCard.title}</h1>
-        <p>{skillCard.description}</p>
-      </article>
-    </div>
-  );
+	return (
+		<div className="skill__card">
+			<div className="skill__logo">
+				<img src={skill.image_path.toString()} alt={skill.name.toString()} />
+			</div>
+			<article className="skill__text">
+				<h1>{skill.name}</h1>
+				<p>{skill.description}</p>
+			</article>
+		</div>
+	);
 }

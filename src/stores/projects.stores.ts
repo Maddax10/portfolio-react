@@ -18,17 +18,13 @@ export const useProjectsStore = create<ProjectsState>((set) => ({
 	fetchProjects: async () => {
 		set({ loading: true, error: null });
 		try {
-			// Simule une API
-			const resp = await fetch(`${API_URL}:${API_PORT}/projects/all`);
-
-			const data: Project[] = await resp.json();
-
-			set({ projects: data, error: null });
-
+			const resp = await fetch(`${API_URL}:${API_PORT}/api/projects/all`);
 			if (!resp.ok) {
 				set({ error: 'réponse invalide' });
 				return;
 			}
+			const data: Project[] = await resp.json();
+			set({ projects: data, error: null });
 		} catch {
 			set({ error: 'Erreur de chargement store' });
 		} finally {

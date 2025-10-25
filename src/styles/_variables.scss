@@ -3,28 +3,21 @@
 $black: black;
 $white: white;
 $white60op: color.scale($white, $alpha: -60%);
+$white90op: color.scale($white, $alpha: -90%);
 $black60op: color.scale($black, $alpha: -60%);
 $darkGray: color.adjust($black, $lightness: 5%);
 $lightGray: color.adjust($black, $lightness: 15%);
 $lighterGray: color.adjust($black, $lightness: 25%);
+
+$red: red;
+$red90op: color.scale($red, $alpha: -90%);
+
 $sunrise: #ffa600;
+
 $transitionTime: 0.3s;
 $doubleTransitionTime: calc($transitionTime * 2);
 $mobile: 800px;
-$navHeight: 75px;
+$navHeight: 120px;
 $skillsPadding: 16px;
 $skillsGap: 8px;
 $skillsCardsPadding: 28px;
-
-:root {
-  --black: #{$black};
-  --white: #{$white};
-  --black60op: #{$black60op};
-  --white60op: #{$white60op};
-  --darkGray: #{$darkGray};
-  --lightGray: #{$lightGray};
-  --lighterGray: #{$lighterGray};
-  --sunrise: #{$sunrise};
-  --transitionTime: #{$transitionTime};
-  --doubleTransitionTime: #{$doubleTransitionTime};
-}

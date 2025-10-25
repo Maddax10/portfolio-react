@@ -1,5 +1,6 @@
 export type Skill = {
-  id: Number;
-  name: String;
-  image_path: String;
+	id: Number;
+	name: String;
+	description: String;
+	image_path: String;
 };

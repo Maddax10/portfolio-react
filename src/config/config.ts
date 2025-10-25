@@ -1,6 +1,6 @@
 const toNumber = (value: String, fallback: Number) => {
-  const n: Number = Number(value);
-  return Number.isFinite(n) ? n : fallback;
+	const n: Number = Number(value);
+	return Number.isFinite(n) ? n : fallback;
 };
 
 export const MODE = import.meta.env.MODE || 'development';

@@ -12,6 +12,7 @@ export const ProjectCard = (props: Props) => {
 	useEffect(() => {
 		console.log('project', project);
 	}, [project]);
+
 	useEffect(() => {
 		console.log('  ProjectCard sub-component');
 	}, []);
@@ -25,14 +26,16 @@ export const ProjectCard = (props: Props) => {
 					<img className="projects__screen" src={project.image_path} />
 				</div>
 				<p className="projects__description">{project.description}</p>
-				<div className="projects__projectLogos">
+				<div className="projects__skills">
 					{project.skills.map((skill, index) => (
-						<img className="projects__projectLogo" src={skill.image_path.toString()} alt={skill.name.toString()} key={index} />
+						<img className="projects__skillsImg" src={skill.image_path.toString()} alt={skill.name.toString()} key={index} />
 					))}
 				</div>
-				<a className="projects__link" href={project.github} target="_blank">
-					<img className="projects____githubLogo" src="/logos/open_link_in_new_tab.svg" alt="open the link in new tab" />
-				</a>
+				<div className="projects__linkScreen">
+					<a className="projects__link" href={project.github} target="_blank">
+						<img className="projects__githubLogo" src="/logos/open_link_in_new_tab.svg" alt="open the link in new tab" />
+					</a>
+				</div>
 			</div>
 		</>
 	);

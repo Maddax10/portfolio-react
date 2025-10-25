@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { ProjectCard } from './sub-components/ProjectCard';
 import { useProjectsStore } from '../stores/projects.stores.ts';
 

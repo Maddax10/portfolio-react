@@ -3,35 +3,34 @@ import { API_PORT, API_URL } from '../config/config';
 import type { Skill } from './models/skill.ts';
 
 type skillsState = {
-  projects: Skill[];
-  loading: boolean;
-  error: string | null;
-  fetchSkills: () => Promise<void>;
-  clear: () => void;
+	skills: Skill[];
+	loading: boolean;
+	error: string | null;
+	fetchSkills: () => Promise<void>;
+	clear: () => void;
 };
 
 export const useSkillsStore = create<skillsState>((set) => ({
-  projects: [],
-  loading: false,
-  error: null,
+	skills: [],
+	loading: false,
+	error: null,
 
-  fetchSkills: async () => {
-    set({ loading: true, error: null });
-    try {
-      // Simule une API
-      const resp = await fetch(`${API_URL}:${API_PORT}/skills/all`);
-      console.log('skills : ', await resp.json());
+	fetchSkills: async () => {
+		set({ loading: true, error: null });
+		try {
+			const resp = await fetch(`${API_URL}:${API_PORT}/api/skills/all`);
+			if (!resp.ok) {
+				set({ error: 'réponse invalide' });
+				return;
+			}
+			const data: Skill[] = await resp.json();
+			set({ skills: data, error: null });
+		} catch {
+			set({ error: 'Erreur de chargement store' });
+		} finally {
+			set({ loading: false });
+		}
+	},
 
-      if (!resp.ok) {
-        set({ error: 'réponse invalide' });
-        return;
-      }
-    } catch {
-      set({ error: 'Erreur de chargement store' });
-    } finally {
-      set({ loading: false });
-    }
-  },
-
-  clear: () => set({ projects: [], error: null }),
+	clear: () => set({ skills: [], error: null }),
 }));

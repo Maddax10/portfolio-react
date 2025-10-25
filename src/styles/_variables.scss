@@ -11,20 +11,8 @@ $sunrise: #ffa600;
 $transitionTime: 0.3s;
 $doubleTransitionTime: calc($transitionTime * 2);
 $mobile: 800px;
-$navHeight: 75px;
+$navHeight: 120px;
 $skillsPadding: 16px;
 $skillsGap: 8px;
 $skillsCardsPadding: 28px;
-
-:root {
-  --black: #{$black};
-  --white: #{$white};
-  --black60op: #{$black60op};
-  --white60op: #{$white60op};
-  --darkGray: #{$darkGray};
-  --lightGray: #{$lightGray};
-  --lighterGray: #{$lighterGray};
-  --sunrise: #{$sunrise};
-  --transitionTime: #{$transitionTime};
-  --doubleTransitionTime: #{$doubleTransitionTime};
-}
+$red: red;

@@ -15,7 +15,7 @@ export const Skills = () => {
 	};
 	useEffect(() => {
 		loadSkills();
-		console.log('⏫Skills component⏫');
+		// console.log('⏫Skills component⏫');
 	}, []);
 
 	return (

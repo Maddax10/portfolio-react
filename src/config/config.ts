@@ -1,12 +1,12 @@
 const toNumber = (value: String, fallback: Number) => {
-	const n: Number = Number(value);
-	return Number.isFinite(n) ? n : fallback;
+  const n: Number = Number(value);
+  return Number.isFinite(n) ? n : fallback;
 };
 
 export const MODE = import.meta.env.MODE || 'development';
 
-export const API_URL = import.meta.env.API_URL || 'http://localhost';
+export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost';
 
-export const API_PORT = toNumber(import.meta.env.API_PORT, 3000);
+export const API_PORT = toNumber(import.meta.env.VITE_API_PORT, 3001);
 
 if (MODE !== 'development') throw new Error("You're in development mode !!");

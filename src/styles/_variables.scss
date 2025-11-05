@@ -2,22 +2,91 @@
 
 $black: black;
 $white: white;
-$white60op: color.scale($white, $alpha: -60%);
-$white90op: color.scale($white, $alpha: -90%);
-$black60op: color.scale($black, $alpha: -60%);
-$darkGray: color.adjust($black, $lightness: 5%);
-$lightGray: color.adjust($black, $lightness: 15%);
-$lighterGray: color.adjust($black, $lightness: 25%);
-
 $red: red;
-$red90op: color.scale($red, $alpha: -90%);
-
 $sunrise: #ffa600;
+//Lighter Black
+$L_black_5: color.adjust($black, $lightness: 5%);
+$L_black_10: color.adjust($black, $lightness: 10%);
+$L_black_15: color.adjust($black, $lightness: 15%);
+$L_black_20: color.adjust($black, $lightness: 20%);
+$L_black_25: color.adjust($black, $lightness: 25%);
+$L_black_30: color.adjust($black, $lightness: 30%);
+$L_black_40: color.adjust($black, $lightness: 40%);
+$L_black_50: color.adjust($black, $lightness: 50%);
+$L_black_60: color.adjust($black, $lightness: 60%);
+$L_black_70: color.adjust($black, $lightness: 70%);
+$L_black_80: color.adjust($black, $lightness: 80%);
+$L_black_90: color.adjust($black, $lightness: 90%);
+$L_black_100: color.adjust($black, $lightness: 100%);
+//Opacity white
+$OP_white_10: color.scale($white, $alpha: -10%);
+$OP_white_20: color.scale($white, $alpha: -20%);
+$OP_white_30: color.scale($white, $alpha: -30%);
+$OP_white_40: color.scale($white, $alpha: -40%);
+$OP_white_50: color.scale($white, $alpha: -50%);
+$OP_white_60: color.scale($white, $alpha: -60%);
+$OP_white_70: color.scale($white, $alpha: -70%);
+$OP_white_80: color.scale($white, $alpha: -80%);
+$OP_white_90: color.scale($white, $alpha: -90%);
+//Opacity black
+$OP_black_10: color.scale($black, $alpha: -10%);
+$OP_black_20: color.scale($black, $alpha: -20%);
+$OP_black_30: color.scale($black, $alpha: -30%);
+$OP_black_40: color.scale($black, $alpha: -40%);
+$OP_black_50: color.scale($black, $alpha: -50%);
+$OP_black_60: color.scale($black, $alpha: -60%);
+$OP_black_70: color.scale($black, $alpha: -70%);
+$OP_black_80: color.scale($black, $alpha: -80%);
+$OP_black_90: color.scale($black, $alpha: -90%);
+
+$OP_red_10: color.scale($red, $alpha: -10%);
+$OP_red_20: color.scale($red, $alpha: -20%);
+$OP_red_30: color.scale($red, $alpha: -30%);
+$OP_red_40: color.scale($red, $alpha: -40%);
+$OP_red_50: color.scale($red, $alpha: -50%);
+$OP_red_60: color.scale($red, $alpha: -60%);
+$OP_red_70: color.scale($red, $alpha: -70%);
+$OP_red_80: color.scale($red, $alpha: -80%);
+$OP_red_90: color.scale($red, $alpha: -90%);
+
+$D_red_10: color.adjust($red, $lightness: -5%);
+$D_red_15: color.adjust($red, $lightness: -7.5%);
+$D_red_20: color.adjust($red, $lightness: -10%);
+$D_red_30: color.adjust($red, $lightness: -15%);
+$D_red_40: color.adjust($red, $lightness: -20%);
+$D_red_50: color.adjust($red, $lightness: -25%);
+$D_red_60: color.adjust($red, $lightness: -30%);
+$D_red_70: color.adjust($red, $lightness: -35%);
+$D_red_80: color.adjust($red, $lightness: -40%);
+$D_red_90: color.adjust($red, $lightness: -45%);
+$D_red_100: color.adjust($red, $lightness: -50%);
+
+$D_sunrise_10: color.adjust($sunrise, $lightness: -10%);
+$D_sunrise_15: color.adjust($sunrise, $lightness: -15%);
+$D_sunrise_20: color.adjust($sunrise, $lightness: -20%);
+$D_sunrise_30: color.adjust($sunrise, $lightness: -30%);
+$D_sunrise_40: color.adjust($sunrise, $lightness: -40%);
+$D_sunrise_50: color.adjust($sunrise, $lightness: -50%);
+$D_sunrise_60: color.adjust($sunrise, $lightness: -60%);
+$D_sunrise_70: color.adjust($sunrise, $lightness: -70%);
+$D_sunrise_80: color.adjust($sunrise, $lightness: -80%);
+$D_sunrise_90: color.adjust($sunrise, $lightness: -90%);
+
+$OP_sunrise_10: color.scale($sunrise, $alpha: -10%);
+$OP_sunrise_20: color.scale($sunrise, $alpha: -20%);
+$OP_sunrise_30: color.scale($sunrise, $alpha: -30%);
+$OP_sunrise_40: color.scale($sunrise, $alpha: -40%);
+$OP_sunrise_50: color.scale($sunrise, $alpha: -50%);
+$OP_sunrise_60: color.scale($sunrise, $alpha: -60%);
+$OP_sunrise_70: color.scale($sunrise, $alpha: -70%);
+$OP_sunrise_80: color.scale($sunrise, $alpha: -80%);
+$OP_sunrise_90: color.scale($sunrise, $alpha: -90%);
 
 $transitionTime: 0.3s;
 $doubleTransitionTime: calc($transitionTime * 2);
 $mobile: 800px;
-$navHeight: 120px;
+$navHeight: 90px;
+$navHeightMobile: 80px;
 $skillsPadding: 16px;
 $skillsGap: 8px;
 $skillsCardsPadding: 28px;

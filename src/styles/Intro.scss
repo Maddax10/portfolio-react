@@ -14,7 +14,11 @@
     color: $white;
 
     span {
-      color: $sunrise;
+      background: linear-gradient(135deg, $sunrise, $red);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
     }
   }
   :nth-child(2) {

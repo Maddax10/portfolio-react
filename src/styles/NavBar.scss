@@ -69,7 +69,7 @@
 		background-color: $darkGray;
 
 		cursor: pointer;
-		height: $navHeight;
+		height: $navHeightMobile;
 		width: 100%;
 		border-radius: 0 0 0.25rem 0.25rem;
 		&:hover {
@@ -95,7 +95,7 @@
 	&__navMobile {
 		position: fixed;
 		z-index: 999;
-		top: $navHeight;
+		top: $navHeightMobile;
 		transform: translateY(-100%);
 		background-color: $black60op;
 		backdrop-filter: blur(20px);

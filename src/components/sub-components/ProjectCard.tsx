@@ -14,7 +14,7 @@ export const ProjectCard = (props: Props) => {
 	}, [project]);
 
 	useEffect(() => {
-		console.log('  ProjectCard sub-component');
+		// console.log('  ProjectCard sub-component');
 	}, []);
 
 	return (

@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { API_PORT, API_URL } from '../config/config';
+import { API_BASE_POINT, API_PORT, API_URL } from '../config/config';
 import type { Project } from './models/project.ts';
 
 type ProjectsState = {
@@ -18,7 +18,7 @@ export const useProjectsStore = create<ProjectsState>((set) => ({
 	fetchProjects: async () => {
 		set({ loading: true, error: null });
 		try {
-			const resp = await fetch(`${API_URL}:${API_PORT}/api/projects/all`);
+			const resp = await fetch(`${API_URL}:${API_PORT}/${API_BASE_POINT}/projects/all`);
 			if (!resp.ok) {
 				set({ error: 'réponse invalide' });
 				return;

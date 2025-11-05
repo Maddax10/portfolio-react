@@ -17,7 +17,7 @@ export function SkillCard(props: Props) {
 	const { skill } = props;
 
 	useEffect(() => {
-		console.log('  SkillCard Sub-component');
+		// console.log('  SkillCard Sub-component');
 	}, []);
 
 	return (

@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { API_PORT, API_URL } from '../config/config';
+import { API_BASE_POINT, API_PORT, API_URL } from '../config/config';
 import type { Skill } from './models/skill.ts';
 
 type skillsState = {
@@ -18,7 +18,7 @@ export const useSkillsStore = create<skillsState>((set) => ({
 	fetchSkills: async () => {
 		set({ loading: true, error: null });
 		try {
-			const resp = await fetch(`${API_URL}:${API_PORT}/api/skills/all`);
+			const resp = await fetch(`${API_URL}:${API_PORT}/${API_BASE_POINT}/skills/all`);
 			if (!resp.ok) {
 				set({ error: 'réponse invalide' });
 				return;

@@ -11,7 +11,7 @@ export const Projects = () => {
 		projectsStore.fetchProjects();
 	};
 	useEffect(() => {
-		console.log('⏫Projects component⏫');
+		// console.log('⏫Projects component⏫');
 
 		loadProjects();
 	}, []);

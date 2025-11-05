@@ -6,4 +6,4 @@ const toNumber = (value: String, fallback: Number) => {
 export const API_URL = import.meta.env.VITE_API_URL;
 export const API_BASE_POINT = import.meta.env.VITE_API_BASE_POINT;
 
-export const API_PORT = toNumber(import.meta.env.VITE_API_PORT, 3000);
+export const API_PORT = toNumber(import.meta.env.VITE_API_PORT, 443);

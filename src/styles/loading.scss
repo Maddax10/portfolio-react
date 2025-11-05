@@ -1,14 +1,14 @@
 @mixin card($color, $bgColor) {
-	color: $color;
-	background-color: $bgColor;
-	padding: 32px;
-	border-radius: 16px;
-	width: 100%;
+  color: $color;
+  background-color: $bgColor;
+  padding: 32px;
+  border-radius: 16px;
+  width: 100%;
 }
 
 .loading {
-	@include card($white, $white90op);
+  @include card($white, $OP_white_90);
 }
 .error {
-	@include card($red, $red90op);
+  @include card($red, $OP_red_90);
 }

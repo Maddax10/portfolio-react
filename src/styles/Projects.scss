@@ -1,143 +1,123 @@
 .projects {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	gap: 0.5rem;
-	width: 100%;
-	padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 1rem;
 
-	h1 {
-		color: $sunrise;
-		margin-block: 1rem;
-		font-size: 3rem;
-		text-align: center;
-		width: 100%;
-	}
-	&__cards {
-		display: flex;
-		flex-direction: column;
-		justify-items: center;
-		align-items: center;
-		width: 100%;
-		height: max-content;
-		gap: 1rem;
-	}
-	&__card {
-		width: 100%;
-		position: relative;
-		z-index: 100;
+  h1 {
+    color: $sunrise;
+    margin-block: 1rem;
+    font-size: 3rem;
+    text-align: center;
+    width: 100%;
+  }
+  &__cards {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: max-content;
+    gap: 1rem;
+  }
+  &__card {
+    min-width: 450px;
+    position: relative;
+    z-index: 100;
 
-		text-decoration: none;
-		background-color: $darkGray;
-		box-shadow: inset 0 0 3px 0 $white60op, 0 0 7px 1px $black;
+    text-decoration: none;
+    background-color: $black;
+    box-shadow: 0 0 7px 1px $OP_black_60;
 
-		padding: 1rem;
-		border-radius: 1rem;
-	}
-	&__title {
-		display: flex;
-		justify-self: center;
-		margin: 1rem;
-	}
-	&__divScreen {
-		box-shadow: inset 0 0 3px 0 $white60op, 0 0 5px 1px $black;
-		border-radius: 1rem;
-		margin-block-end: 1rem;
-		overflow: hidden;
-	}
-	&__screen {
-		display: flex;
-		position: relative;
-		z-index: -1;
-		width: 100%;
-		border-radius: 1rem;
-	}
+    border-radius: 1rem;
 
-	&__description {
-		margin-block-start: 0.5rem;
-		font-weight: 500;
-		font-size: 1.1rem;
-		color: $white60op;
-		width: 95%;
-		justify-self: center;
-		text-align: center;
-	}
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    min-width: 150px;
+    max-width: 450px;
+    min-height: 450px;
+  }
+  &__title {
+    transition: all $transitionTime ease-out;
+    display: flex;
+    justify-content: start;
+    align-items: end;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 15;
+    padding: 1rem;
+    &:hover {
+      backdrop-filter: blur(8px);
+    }
+  }
+  &__divScreen {
+    position: relative;
+    z-index: 1;
+    border-radius: 1rem 1rem 0 0;
+    overflow: hidden;
+  }
+  &__screen {
+    width: 100%;
+    aspect-ratio: 1 / 0.5;
+  }
 
-	&__skills {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		gap: 1rem;
-		margin-block: 1rem;
-		padding: 1rem;
-		box-shadow: inset 0 0 3px 0 $white60op, 0 0 5px 1px $black;
-		border-radius: 1rem;
-		background-color: $white60op;
-	}
-	&__skillsImg {
-		width: 20%;
-	}
+  &__description {
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: $OP_white_60;
+    width: 100%;
+    min-height: 100px;
+    justify-self: center;
+    text-align: justify;
+    padding: 16px;
+  }
 
-	&__githubLogo {
-		position: relative;
-		z-index: 2;
-		display: flex;
-		width: 64px;
-		height: 64px;
-		border-radius: 100%;
-		padding: 2px;
-	}
-	&__link {
-		transition: all $transitionTime ease-out;
+  &__skills {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem;
+    padding-block: 1rem;
+    box-shadow: inset 0 0 3px 0 $OP_white_60, 0 0 5px 1px $black;
+    border-radius: 1rem;
+    background-color: $OP_white_60;
+  }
+  &__skillsImg {
+    width: 48px;
+  }
 
-		display: flex;
-		justify-content: center;
-		height: 100%;
-		width: 100%;
-		padding: 10px;
-		border-radius: 1rem;
+  &__githubLogo {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    width: 64px;
+    height: 64px;
+    border-radius: 100%;
+    padding: 2px;
+  }
+  &__link {
+    transition: all $transitionTime ease-out;
 
-		&:hover {
-			background-color: $white;
-			// transform: translateY(3px);
-			box-shadow: 0 0 10px 2px $lighterGray;
-		}
-	}
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    border-radius: 0 0 16px 16px;
+
+    &:hover {
+      background-color: $white;
+      // transform: translateY(3px);
+      box-shadow: 0 0 10px 2px $L_black_25;
+    }
+  }
 }
 
 @media (min-width: $mobile) {
-	.projects {
-		height: 100%;
-
-		&__cards {
-			flex-direction: row;
-			justify-content: center;
-			// background-color: red;
-			flex-flow: row wrap;
-			height: 100%;
-		}
-		&__card {
-			display: flex;
-			flex-direction: column;
-			width: auto;
-			max-width: 450px;
-		}
-		&__skillsImg {
-			width: 48px;
-		}
-		&__title {
-			height: 28px;
-		}
-		&__divScreen {
-			height: 200px;
-			img {
-				height: 200px;
-			}
-		}
-		&__description {
-			height: 100px;
-			text-align: justify;
-		}
-	}
 }

@@ -29,15 +29,15 @@
     }
     button {
       transition: ease $transitionTime;
-      background-color: $darkGray;
+      background-color: $L_black_10;
       color: $white;
-      box-shadow: 0 5px 2px 0 $lightGray;
+      box-shadow: 0 5px 2px 0 $L_black_25;
       border: none;
       cursor: pointer;
       &:hover {
         color: $sunrise;
         transform: translateY(3px);
-        box-shadow: 0 2px 2px $darkGray, inset 0 0 0 1px $sunrise;
+        box-shadow: 0 2px 2px $L_black_10, inset 0 0 0 1px $sunrise;
       }
     }
   }

@@ -109,6 +109,16 @@
 		margin-block-start: 2.25rem;
 		opacity: 0;
 		animation: heroUp 0.8s var(--ease) 0.62s forwards;
+
+		@media (max-width: 560px) {
+			flex-direction: column;
+			align-items: stretch;
+
+			.btn {
+				width: 100%;
+				justify-content: center;
+			}
+		}
 	}
 
 	//-------------------------------------------------- Cue de scroll

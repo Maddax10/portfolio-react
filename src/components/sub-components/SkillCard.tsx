@@ -8,7 +8,7 @@ type Props = { skill: Skill; index?: number };
  */
 export function SkillCard({ skill, index = 0 }: Props) {
 	return (
-		<div className="skill__card" style={{ animationDelay: `${index * 60}ms` }}>
+		<div className="skill__card" data-snap-item style={{ animationDelay: `${index * 60}ms` }}>
 			<div className="skill__logo">
 				<img src={skill.image_path.toString()} alt={skill.name.toString()} />
 			</div>

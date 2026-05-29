@@ -1,9 +1,5 @@
 .footer {
 	position: relative;
-	min-height: 100dvh;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
 	max-width: var(--maxw);
 	margin-inline: auto;
 	padding: clamp(3.5rem, 8vw, 6rem) clamp(1.1rem, 5vw, 2.5rem) 2.5rem;
@@ -102,7 +98,6 @@
 
 	//-------------------------------------------------- Copyright
 	&__copyright {
-		margin-block-start: auto;
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-between;

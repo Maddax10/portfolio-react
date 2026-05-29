@@ -8,7 +8,7 @@ type Props = { project: Project; index?: number };
  */
 export const ProjectCard = ({ project, index = 0 }: Props) => {
 	return (
-		<article className="projects__card" style={{ animationDelay: `${index * 90}ms` }}>
+		<article className="projects__card" data-snap-item style={{ animationDelay: `${index * 90}ms` }}>
 			<div className="projects__media">
 				<img className="projects__screen" src={project.image_path} alt={project.title} loading="lazy" />
 				<div className="projects__mediaShade" />

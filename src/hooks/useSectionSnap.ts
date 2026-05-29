@@ -37,25 +37,52 @@ export function useSectionSnap(selector = '.intro, .section, .footer') {
 			return idx;
 		};
 
+		// Points d'arrêt d'un bloc : début, hauts de cartes (pour ne jamais
+		// couper une carte), fin du bloc. Identiques dans les deux sens =>
+		// ancrages cohérents au scroll haut/bas.
+		const buildStops = (sec: HTMLElement, vh: number) => {
+			const top = sec.offsetTop;
+			const bottom = Math.max(top, sec.offsetTop + sec.offsetHeight - vh);
+			if (bottom - top <= EDGE) return [top]; // bloc qui tient à l'écran
+
+			const cand = [top];
+			sec.querySelectorAll<HTMLElement>('[data-snap-item]').forEach((el) => {
+				const t = el.getBoundingClientRect().top + window.scrollY;
+				if (t > top + EDGE && t < bottom - EDGE) cand.push(t);
+			});
+			cand.push(bottom);
+			cand.sort((a, b) => a - b);
+
+			// Avance gloutonne : le plus loin possible (≤ 1 écran) en
+			// s'alignant sur un haut de carte, sans sauter de contenu.
+			const stops = [top];
+			while (stops[stops.length - 1] < bottom - EDGE) {
+				const last = stops[stops.length - 1];
+				let next = last;
+				for (const c of cand) if (c > last + EDGE && c <= last + vh + EDGE) next = c;
+				if (next === last) next = Math.min(bottom, last + vh); // gros écart : pas forcé
+				stops.push(next);
+			}
+			return stops;
+		};
+
 		const jump = (dir: 1 | -1) => {
 			if (locked) return;
 			const vh = window.innerHeight;
 			const idx = currentIndex();
-			const sec = sections[idx];
-			const top = sec.offsetTop;
-			const bottom = Math.max(top, sec.offsetTop + sec.offsetHeight - vh); // fin du bloc
+			const stops = buildStops(sections[idx], vh);
 			const y = window.scrollY;
-			const STEP = vh * 0.9;
 
-			if (dir > 0) {
-				// avance dans un bloc haut jusqu'à sa fin, sinon bloc suivant
-				if (bottom - y > EDGE) scrollToPos(Math.min(bottom, y + STEP));
-				else if (sections[idx + 1]) scrollToPos(sections[idx + 1].offsetTop);
-			} else {
-				// remonte dans un bloc haut jusqu'à son début, sinon bloc précédent
-				if (y - top > EDGE) scrollToPos(Math.max(top, y - STEP));
-				else if (sections[idx - 1]) scrollToPos(sections[idx - 1].offsetTop);
-			}
+			// arrêt le plus proche de la position actuelle
+			let ci = 0;
+			stops.forEach((s, i) => {
+				if (Math.abs(s - y) < Math.abs(stops[ci] - y)) ci = i;
+			});
+
+			const ni = ci + dir;
+			if (ni >= 0 && ni < stops.length) scrollToPos(stops[ni]);
+			else if (dir > 0 && sections[idx + 1]) scrollToPos(sections[idx + 1].offsetTop);
+			else if (dir < 0 && sections[idx - 1]) scrollToPos(sections[idx - 1].offsetTop);
 		};
 
 		//-------------------------------------------------- Molette (desktop)

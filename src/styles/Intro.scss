@@ -125,8 +125,10 @@
 	&__scroll {
 		position: absolute;
 		bottom: 2rem;
-		left: 50%;
-		transform: translateX(-50%);
+		left: 0;
+		right: 0;
+		margin-inline: auto;
+		width: max-content;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -134,10 +136,14 @@
 		font-family: 'Space Mono', monospace;
 		font-size: 0.72rem;
 		letter-spacing: 0.25em;
+		// décale le texte vers la droite pour compenser l'espacement de
+		// fin de lettre et recentrer visuellement le glyphe sous le trait
+		text-indent: 0.25em;
 		text-transform: uppercase;
 		color: var(--ink-faint);
 		opacity: 0;
-		animation: heroUp 0.8s var(--ease) 0.8s forwards;
+		// fade seul : pas de transform, sinon le centrage serait écrasé
+		animation: fadeIn 0.8s var(--ease) 0.8s forwards;
 	}
 
 	&__scrollLine {
@@ -152,6 +158,12 @@
 	to {
 		opacity: 1;
 		transform: none;
+	}
+}
+
+@keyframes fadeIn {
+	to {
+		opacity: 1;
 	}
 }
 

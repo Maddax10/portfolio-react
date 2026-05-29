@@ -25,6 +25,7 @@
 	&__inner {
 		// max-width: min(100%, 680px);
     display:flex;
+    flex-direction: column;
     justify-content: center;
     width: 100%;
 	}

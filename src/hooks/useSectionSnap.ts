@@ -49,13 +49,6 @@ export function useSectionSnap(selector = '.intro, .section, .footer') {
 			rafId = requestAnimationFrame(step);
 		};
 
-		const currentIndex = () => {
-			let idx = 0;
-			sections.forEach((s, i) => {
-				if (s.offsetTop <= window.scrollY + EDGE) idx = i;
-			});
-			return idx;
-		};
 
 		// Points d'arrêt d'un bloc : début, hauts de cartes (pour ne jamais
 		// couper une carte), fin du bloc. Identiques dans les deux sens =>
@@ -98,30 +91,30 @@ export function useSectionSnap(selector = '.intro, .section, .footer') {
 			return stops;
 		};
 
+		// Liste globale ordonnée de TOUS les points d'arrêt (toutes sections),
+		// bornée au scroll max : gère les sections courtes (footer) qui ne
+		// peuvent pas atteindre leur offsetTop, et rend le parcours réversible.
+		const allStops = () => {
+			const vh = window.innerHeight;
+			const maxScroll = Math.max(0, document.documentElement.scrollHeight - vh);
+			const raw: number[] = [];
+			sections.forEach((sec) => buildStops(sec, vh).forEach((s) => raw.push(Math.min(Math.max(0, s), maxScroll))));
+			raw.sort((a, b) => a - b);
+			const out: number[] = [];
+			for (const s of raw) if (out.length === 0 || s - out[out.length - 1] > EDGE) out.push(s);
+			return out;
+		};
+
 		const jump = (dir: 1 | -1) => {
 			if (locked) return;
-			const vh = window.innerHeight;
-			const idx = currentIndex();
-			const stops = buildStops(sections[idx], vh);
+			const stops = allStops();
 			const y = window.scrollY;
-
-			// arrêt le plus proche de la position actuelle
 			let ci = 0;
 			stops.forEach((s, i) => {
 				if (Math.abs(s - y) < Math.abs(stops[ci] - y)) ci = i;
 			});
-
 			const ni = ci + dir;
-			if (ni >= 0 && ni < stops.length) {
-				scrollToPos(stops[ni]);
-			} else if (dir > 0 && sections[idx + 1]) {
-				// vers le bloc suivant : son début
-				scrollToPos(sections[idx + 1].offsetTop);
-			} else if (dir < 0 && sections[idx - 1]) {
-				// vers le bloc précédent : sa FIN (réversibilité du parcours)
-				const prev = buildStops(sections[idx - 1], vh);
-				scrollToPos(prev[prev.length - 1]);
-			}
+			if (ni >= 0 && ni < stops.length) scrollToPos(stops[ni]);
 		};
 
 		//-------------------------------------------------- Molette (desktop)

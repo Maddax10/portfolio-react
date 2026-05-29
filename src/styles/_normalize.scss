@@ -47,9 +47,14 @@ html {
 	scroll-behavior: smooth;
 	scroll-padding-top: 90px;
 	-webkit-font-smoothing: antialiased;
-	// Snap doux : un petit scroll fait accrocher la section suivante,
-	// sans piéger les sections plus hautes que l'écran (proximity).
-	scroll-snap-type: y proximity;
+}
+
+// Snap doux uniquement sur desktop : sur mobile il est peu fiable
+// (barres d'URL dynamiques, inertie tactile) — on le désactive.
+@media (min-width: 800px) {
+	html {
+		scroll-snap-type: y proximity;
+	}
 }
 
 body {

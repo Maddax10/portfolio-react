@@ -7,6 +7,12 @@
 // suivant tant qu'on n'a pas sauté dessus (snap géré par useSectionSnap).
 .section {
 	min-height: 100dvh;
+	// Contenu centré verticalement : s'adapte à la quantité d'éléments.
+	// min-height (et non height) => si le contenu dépasse, le bloc grandit
+	// sans rogner le haut, et la pagination prend le relais.
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	max-width: var(--maxw);
 	margin-inline: auto;
 	padding: clamp(5.5rem, 9vw, 7.5rem) clamp(1.1rem, 5vw, 2.5rem);

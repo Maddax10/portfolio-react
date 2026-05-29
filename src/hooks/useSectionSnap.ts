@@ -85,9 +85,16 @@ export function useSectionSnap(selector = '.intro, .section, .footer') {
 			});
 
 			const ni = ci + dir;
-			if (ni >= 0 && ni < stops.length) scrollToPos(stops[ni]);
-			else if (dir > 0 && sections[idx + 1]) scrollToPos(sections[idx + 1].offsetTop);
-			else if (dir < 0 && sections[idx - 1]) scrollToPos(sections[idx - 1].offsetTop);
+			if (ni >= 0 && ni < stops.length) {
+				scrollToPos(stops[ni]);
+			} else if (dir > 0 && sections[idx + 1]) {
+				// vers le bloc suivant : son début
+				scrollToPos(sections[idx + 1].offsetTop);
+			} else if (dir < 0 && sections[idx - 1]) {
+				// vers le bloc précédent : sa FIN (réversibilité du parcours)
+				const prev = buildStops(sections[idx - 1], vh);
+				scrollToPos(prev[prev.length - 1]);
+			}
 		};
 
 		//-------------------------------------------------- Molette (desktop)

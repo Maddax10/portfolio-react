@@ -23,8 +23,8 @@ export function useSectionSnap(selector = '.intro, .section, .footer') {
 		let rafId = 0;
 
 		// Désactivation du snap après plusieurs scrolls rapprochés.
-		const BURST_N = 4; // nb de scrolls rapprochés avant désactivation
-		const BURST_GAP = 600; // ms : au-delà, le compteur retombe
+		const BURST_N = 2; // nb de scrolls rapprochés avant désactivation
+		const BURST_GAP = 450; // ms : au-delà, le compteur retombe
 		const REENABLE = 900; // ms d'inactivité avant réactivation du snap
 		let snapOff = false;
 		let burst = 0;

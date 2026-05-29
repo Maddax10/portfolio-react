@@ -15,9 +15,6 @@ export const Footer = () => {
 					<ul>
 						<li>Michon Maximilien</li>
 						<li>Ath, Hainaut · Belgique</li>
-						<li>
-							<a href="tel:0485976581">0485 / 97.65.81</a>
-						</li>
 					</ul>
 				</div>
 

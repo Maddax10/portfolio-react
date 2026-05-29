@@ -49,14 +49,6 @@ html {
 	-webkit-font-smoothing: antialiased;
 }
 
-// Snap doux uniquement sur desktop : sur mobile il est peu fiable
-// (barres d'URL dynamiques, inertie tactile) — on le désactive.
-@media (min-width: 800px) {
-	html {
-		scroll-snap-type: y proximity;
-	}
-}
-
 body {
 	font-family: 'Raleway', sans-serif;
 	color: var(--ink);

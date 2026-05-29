@@ -40,14 +40,19 @@ export function useSectionSnap(selector = '.intro, .section, .footer') {
 		// Points d'arrêt d'un bloc : début, hauts de cartes (pour ne jamais
 		// couper une carte), fin du bloc. Identiques dans les deux sens =>
 		// ancrages cohérents au scroll haut/bas.
+		const navEl = document.querySelector<HTMLElement>('.nav');
+		const navOffset = () => (navEl?.offsetHeight ?? 0) + 12; // hauteur nav + marge
+
 		const buildStops = (sec: HTMLElement, vh: number) => {
 			const top = sec.offsetTop;
 			const bottom = Math.max(top, sec.offsetTop + sec.offsetHeight - vh);
 			if (bottom - top <= EDGE) return [top]; // bloc qui tient à l'écran
 
+			const nav = navOffset();
 			const cand = [top];
 			sec.querySelectorAll<HTMLElement>('[data-snap-item]').forEach((el) => {
-				const t = el.getBoundingClientRect().top + window.scrollY;
+				// position qui place le haut de la carte juste SOUS la nav fixe
+				const t = el.getBoundingClientRect().top + window.scrollY - nav;
 				if (t > top + EDGE && t < bottom - EDGE) cand.push(t);
 			});
 			cand.push(bottom);

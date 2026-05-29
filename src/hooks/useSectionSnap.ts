@@ -85,8 +85,11 @@ export function useSectionSnap(selector = '.intro, .section, .footer') {
 
 		const onTouchMove = (e: TouchEvent) => {
 			if (e.touches.length !== 1) return; // laisse le pinch-zoom
-			lastY = e.touches[0].clientY;
-			e.preventDefault(); // neutralise le défilement natif
+			const y = e.touches[0].clientY;
+			lastY = y;
+			// En haut de page + tirage vers le bas : laisse le pull-to-refresh natif.
+			if (y > startY && window.scrollY <= 0) return;
+			e.preventDefault(); // sinon neutralise le défilement natif
 		};
 
 		const onTouchEnd = () => {

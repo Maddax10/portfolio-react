@@ -1,4 +1,10 @@
+import { useRef } from 'react';
+import { useFitText } from '../hooks/useFitText';
+
 export const Intro = () => {
+	const titleRef = useRef<HTMLHeadingElement>(null);
+	useFitText(titleRef, { min: 30, max: 150 });
+
 	return (
 		<section className="intro" id="intro">
 			<div className="intro__grid" aria-hidden="true" />
@@ -8,7 +14,7 @@ export const Intro = () => {
 					<span className="intro__dot" /> Développeur Front-End · Ath, Belgique
 				</span>
 
-				<h1 className="intro__title">
+				<h1 className="intro__title" ref={titleRef}>
 					<span className="intro__line">THE WEB</span>
 					<span className="intro__line intro__accent">QUALITY</span>
 				</h1>

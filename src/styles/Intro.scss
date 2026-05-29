@@ -50,15 +50,17 @@
 	}
 
 	&__title {
-		font-size: clamp(2.6rem, 14vw, 9rem);
+		width: 100%;
+		// Valeur de repli si JS désactivé ; useFitText prend ensuite le relais.
+		font-size: clamp(2.6rem, 13vw, 9rem);
 		font-weight: 800;
 		line-height: 0.92;
 		letter-spacing: -0.03em;
-		max-width: 100%;
 	}
 
 	&__line {
 		display: block;
+		white-space: nowrap;
 		opacity: 0;
 		transform: translateY(40px);
 		animation: heroUp 0.9s var(--ease) forwards;

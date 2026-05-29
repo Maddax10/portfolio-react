@@ -65,7 +65,7 @@ export function useSectionSnap(selector = '.intro, .section, .footer') {
 
 			locked = true;
 			// durée courte proportionnelle à la distance (rapide mais fluide)
-			const duration = Math.min(200, Math.max(90, Math.abs(dist) * 0.18));
+			const duration = Math.min(120, Math.max(50, Math.abs(dist) * 0.1));
 			const start = performance.now();
 			const ease = (t: number) => 1 - Math.pow(1 - t, 3); // easeOutCubic
 

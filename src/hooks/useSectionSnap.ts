@@ -22,6 +22,35 @@ export function useSectionSnap(selector = '.intro, .section, .footer') {
 		let locked = false;
 		let rafId = 0;
 
+		// Désactivation du snap après plusieurs scrolls rapprochés.
+		const BURST_N = 4; // nb de scrolls rapprochés avant désactivation
+		const BURST_GAP = 600; // ms : au-delà, le compteur retombe
+		const REENABLE = 900; // ms d'inactivité avant réactivation du snap
+		let snapOff = false;
+		let burst = 0;
+		let lastInputAt = 0;
+		let burstTimer = 0;
+		let idleTimer = 0;
+
+		const registerInput = () => {
+			const now = performance.now();
+			if (now - lastInputAt > 80) {
+				// gestes rapprochés (<80ms) = un seul geste (ex. trackpad)
+				burst += 1;
+				if (burst >= BURST_N) snapOff = true;
+			}
+			lastInputAt = now;
+			clearTimeout(burstTimer);
+			burstTimer = window.setTimeout(() => (burst = 0), BURST_GAP);
+			if (snapOff) {
+				clearTimeout(idleTimer);
+				idleTimer = window.setTimeout(() => {
+					snapOff = false;
+					burst = 0;
+				}, REENABLE);
+			}
+		};
+
 		const scrollToPos = (top: number) => {
 			const fromY = window.scrollY;
 			const toY = Math.max(0, top);
@@ -128,9 +157,16 @@ export function useSectionSnap(selector = '.intro, .section, .footer') {
 
 		//-------------------------------------------------- Molette (desktop)
 		const onWheel = (e: WheelEvent) => {
-			if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return; // scroll horizontal
+			if (Math.abs(e.deltaY) <= Math.abs(e.deltaX) || Math.abs(e.deltaY) < 2) return;
+			if (snapOff) {
+				registerInput(); // snap désactivé : scroll natif
+				return;
+			}
 			e.preventDefault();
-			if (Math.abs(e.deltaY) >= 2) jump(e.deltaY > 0 ? 1 : -1);
+			if (locked) return; // animation en cours : on ignore
+			registerInput();
+			if (snapOff) return; // vient de basculer en libre
+			jump(e.deltaY > 0 ? 1 : -1);
 		};
 
 		//-------------------------------------------------- Clavier
@@ -138,8 +174,9 @@ export function useSectionSnap(selector = '.intro, .section, .footer') {
 			const tag = (e.target as HTMLElement)?.tagName;
 			if (tag === 'INPUT' || tag === 'TEXTAREA') return;
 			const dir = e.key === 'ArrowDown' || e.key === 'PageDown' ? 1 : e.key === 'ArrowUp' || e.key === 'PageUp' ? -1 : 0;
-			if (!dir) return;
+			if (!dir || snapOff) return;
 			e.preventDefault();
+			if (locked) return;
 			jump(dir as 1 | -1);
 		};
 
@@ -157,12 +194,19 @@ export function useSectionSnap(selector = '.intro, .section, .footer') {
 			const y = e.touches[0].clientY;
 			// En haut de page + tirage vers le bas : laisse le pull-to-refresh natif.
 			if (y > startY && window.scrollY <= 0) return;
+			if (snapOff) {
+				registerInput(); // snap désactivé : défilement natif libre
+				return;
+			}
 			e.preventDefault(); // neutralise le défilement natif
+			if (locked) return; // animation en cours : on ignore
 			// Déclenche dès le mouvement (pas au relâchement) => démarrage instantané.
-			if (gestureJumped || locked) return;
+			if (gestureJumped) return;
 			const delta = startY - y;
 			if (Math.abs(delta) >= SWIPE) {
 				gestureJumped = true;
+				registerInput();
+				if (snapOff) return; // vient de basculer en libre
 				jump(delta > 0 ? 1 : -1);
 			}
 		};
@@ -178,6 +222,8 @@ export function useSectionSnap(selector = '.intro, .section, .footer') {
 			window.removeEventListener('touchstart', onTouchStart);
 			window.removeEventListener('touchmove', onTouchMove);
 			cancelAnimationFrame(rafId);
+			clearTimeout(burstTimer);
+			clearTimeout(idleTimer);
 		};
 	}, [selector]);
 }

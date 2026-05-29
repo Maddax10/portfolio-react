@@ -13,7 +13,7 @@ import { useEffect } from 'react';
  */
 export function useSectionSnap(selector = '.intro, .section, .footer') {
 	useEffect(() => {
-		const NAV = 80; // doit correspondre à scroll-margin-top des sections
+		const NAV = 0; // sections en min-height:100dvh, alignées plein écran
 		const EDGE = 6; // tolérance px pour détecter les bords
 		const SWIPE = 24; // distance px mini d'un swipe pour déclencher
 		const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -54,7 +54,7 @@ export function useSectionSnap(selector = '.intro, .section, .footer') {
 		// dans une section plus haute que l'écran)
 		const canJump = (dir: 1 | -1) => {
 			const sec = sections[currentIndex()];
-			if (sec.offsetHeight <= window.innerHeight - NAV) return true;
+			if (sec.offsetHeight <= window.innerHeight + EDGE) return true;
 			const atTop = window.scrollY <= sec.offsetTop - NAV + EDGE;
 			const atBottom = window.scrollY + window.innerHeight >= sec.offsetTop + sec.offsetHeight - EDGE;
 			return dir > 0 ? atBottom : atTop;
@@ -76,7 +76,7 @@ export function useSectionSnap(selector = '.intro, .section, .footer') {
 			const alignedTop = Math.max(0, sec.offsetTop - NAV);
 
 			let dest: number;
-			if (sec.offsetHeight <= vh - NAV) {
+			if (sec.offsetHeight <= vh + EDGE) {
 				dest = alignedTop; // section qui tient : alignée en haut
 			} else {
 				// section trop haute : on borne dans sa plage lisible

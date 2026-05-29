@@ -2,19 +2,14 @@
 //   Utilitaires partagés : sections, en-têtes, boutons, reveal
 //=================================================================
 
-//-------------------------------------------------- Sections (snap JS)
-// Le snap entre sections est géré par useSectionSnap ; scroll-margin-top
-// assure le décalage sous la nav fixe lors du scrollIntoView.
-.intro,
-.section,
-.footer {
-	scroll-margin-top: 80px;
-}
-
+//-------------------------------------------------- Sections « full-page »
+// Chaque section occupe au moins tout l'écran : on ne voit jamais le bloc
+// suivant tant qu'on n'a pas sauté dessus (snap géré par useSectionSnap).
 .section {
+	min-height: 100dvh;
 	max-width: var(--maxw);
 	margin-inline: auto;
-	padding: clamp(4rem, 9vw, 7.5rem) clamp(1.1rem, 5vw, 2.5rem);
+	padding: clamp(5.5rem, 9vw, 7.5rem) clamp(1.1rem, 5vw, 2.5rem);
 }
 
 .section__head {

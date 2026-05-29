@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { NavBarLogo } from './sub-components/NavBarLogo';
+import { Logo } from './sub-components/Logo';
 import { useScrollSpy } from '../hooks/useScrollSpy';
 
 const LINKS = [
@@ -20,8 +21,11 @@ export const NavBar = () => {
 
 	return (
 		<nav className={`nav ${open ? 'nav--open' : ''}`}>
-			<a className="nav__brand" href="#intro" onClick={close}>
-				Maximilien<span>.</span>
+			<a className="nav__brand" href="#intro" onClick={close} aria-label="Accueil">
+				<Logo className="nav__mark" />
+				<span className="nav__name">
+					Maximilien<span>.</span>
+				</span>
 			</a>
 
 			<NavBarLogo open={open} onToggle={() => setOpen((v) => !v)} />

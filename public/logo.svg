@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <linearGradient id="velGrad" x1="8" y1="6" x2="42" y2="42" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffc24d"/>
+      <stop offset="0.5" stop-color="#ffa600"/>
+      <stop offset="1" stop-color="#ff3b1f"/>
+    </linearGradient>
+  </defs>
+  <rect width="48" height="48" rx="11" fill="#0a0908"/>
+  <path d="M12.9 14.82 A16 16 0 1 1 12.9 33.18" stroke="url(#velGrad)" stroke-width="3.4" stroke-linecap="round"/>
+  <g stroke="#ffa600" stroke-width="2.6" stroke-linecap="round">
+    <line x1="11" y1="18" x2="3" y2="18" opacity="0.9"/>
+    <line x1="12" y1="24" x2="1" y2="24" opacity="0.6"/>
+    <line x1="11" y1="30" x2="4" y2="30" opacity="0.32"/>
+  </g>
+  <path d="M17 18 L23 24 L17 30" stroke="url(#velGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+  <path d="M24 17 L32 24 L24 31" stroke="url(#velGrad)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

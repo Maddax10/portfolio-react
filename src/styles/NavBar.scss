@@ -15,14 +15,44 @@
 
 	//-------------------------------------------------- Marque
 	&__brand {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.55rem;
 		font-family: 'Syne', sans-serif;
 		font-weight: 800;
 		font-size: 1.3rem;
 		letter-spacing: -0.02em;
 		color: var(--ink);
 
-		span {
+		.nav__name span {
 			color: var(--amber);
+		}
+
+		&:hover .nav__mark {
+			transform: translateX(2px);
+
+			.logo__streaks {
+				transform: scaleX(1.35);
+			}
+			.logo__ring {
+				stroke-dasharray: 0;
+			}
+		}
+	}
+
+	&__mark {
+		width: 30px;
+		height: 30px;
+		flex: 0 0 auto;
+		transition: transform var(--t) var(--ease);
+		filter: drop-shadow(0 0 6px rgba(255, 166, 0, 0.35));
+
+		.logo__streaks {
+			transform-origin: left center;
+			transition: transform var(--t) var(--ease);
+		}
+		.logo__ring {
+			transition: stroke-dasharray var(--t) var(--ease);
 		}
 	}
 

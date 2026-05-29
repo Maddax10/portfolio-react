@@ -37,7 +37,7 @@ export function useSectionSnap(selector = '.intro, .section, .footer') {
 			locked = true;
 			target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
 			clearTimeout(lockTimer);
-			lockTimer = setTimeout(() => (locked = false), reduce ? 80 : 700);
+			lockTimer = setTimeout(() => (locked = false), reduce ? 80 : 200);
 		};
 
 		// Le saut est-il autorisé dans cette direction depuis la section courante ?

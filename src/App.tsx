@@ -6,9 +6,11 @@ import "./App.css";
 import { About } from "./components/About";
 import { Footer } from "./components/Footer";
 import { useReveal } from "./hooks/useReveal";
+import { useSnapFit } from "./hooks/useSnapFit";
 
 const App = () => {
   useReveal();
+  useSnapFit();
 
   return (
     <>

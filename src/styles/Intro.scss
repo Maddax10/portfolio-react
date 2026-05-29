@@ -23,7 +23,10 @@
 	}
 
 	&__inner {
-		max-width: min(100%, 680px);
+		// max-width: min(100%, 680px);
+    display:flex;
+    justify-content: center;
+    width: 100%;
 	}
 
 	&__eyebrow {

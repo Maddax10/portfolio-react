@@ -23,7 +23,7 @@
 	}
 
 	&__inner {
-		max-width: 22ch;
+		max-width: min(100%, 680px);
 	}
 
 	&__eyebrow {
@@ -50,10 +50,11 @@
 	}
 
 	&__title {
-		font-size: clamp(3.2rem, 16vw, 9rem);
+		font-size: clamp(2.6rem, 14vw, 9rem);
 		font-weight: 800;
 		line-height: 0.92;
 		letter-spacing: -0.03em;
+		max-width: 100%;
 	}
 
 	&__line {
@@ -71,6 +72,10 @@
 	}
 
 	&__accent {
+		// fit-content : la boîte (donc le fond du dégradé) épouse le mot,
+		// sinon les lettres dépassant la boîte deviennent invisibles.
+		width: fit-content;
+		max-width: 100%;
 		background: var(--grad);
 		background-size: 200% 200%;
 		-webkit-background-clip: text;

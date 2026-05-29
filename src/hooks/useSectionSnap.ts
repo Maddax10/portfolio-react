@@ -13,7 +13,7 @@ import { useEffect } from 'react';
 export function useSectionSnap(selector = '.intro, .section, .footer') {
 	useEffect(() => {
 		const EDGE = 6; // tolérance px
-		const SWIPE = 24; // distance px mini d'un swipe
+		const SWIPE = 16; // distance px mini d'un swipe pour déclencher
 		const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 		const sections = Array.from(document.querySelectorAll<HTMLElement>(selector));
@@ -143,38 +143,38 @@ export function useSectionSnap(selector = '.intro, .section, .footer') {
 
 		//-------------------------------------------------- Tactile (mobile)
 		let startY = 0;
-		let lastY = 0;
+		let gestureJumped = false;
 
 		const onTouchStart = (e: TouchEvent) => {
-			startY = lastY = e.touches[0].clientY;
+			startY = e.touches[0].clientY;
+			gestureJumped = false;
 		};
 
 		const onTouchMove = (e: TouchEvent) => {
 			if (e.touches.length !== 1) return; // laisse le pinch-zoom
 			const y = e.touches[0].clientY;
-			lastY = y;
 			// En haut de page + tirage vers le bas : laisse le pull-to-refresh natif.
 			if (y > startY && window.scrollY <= 0) return;
-			e.preventDefault(); // sinon neutralise le défilement natif
-		};
-
-		const onTouchEnd = () => {
-			const delta = startY - lastY;
-			if (Math.abs(delta) >= SWIPE) jump(delta > 0 ? 1 : -1);
+			e.preventDefault(); // neutralise le défilement natif
+			// Déclenche dès le mouvement (pas au relâchement) => démarrage instantané.
+			if (gestureJumped || locked) return;
+			const delta = startY - y;
+			if (Math.abs(delta) >= SWIPE) {
+				gestureJumped = true;
+				jump(delta > 0 ? 1 : -1);
+			}
 		};
 
 		window.addEventListener('wheel', onWheel, { passive: false });
 		window.addEventListener('keydown', onKey);
 		window.addEventListener('touchstart', onTouchStart, { passive: true });
 		window.addEventListener('touchmove', onTouchMove, { passive: false });
-		window.addEventListener('touchend', onTouchEnd);
 
 		return () => {
 			window.removeEventListener('wheel', onWheel);
 			window.removeEventListener('keydown', onKey);
 			window.removeEventListener('touchstart', onTouchStart);
 			window.removeEventListener('touchmove', onTouchMove);
-			window.removeEventListener('touchend', onTouchEnd);
 			cancelAnimationFrame(rafId);
 		};
 	}, [selector]);

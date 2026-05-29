@@ -77,11 +77,20 @@ export function useSectionSnap(selector = '.intro, .section, .footer') {
 				const last = stops[stops.length - 1];
 				const viewportBottom = last + vh;
 				const cut = items.find((it) => it.bottom > viewportBottom + EDGE);
-				if (!cut) break; // tout le reste tient dans l'écran
 
-				let next = Math.min(cut.top - nav, bottom);
+				let next: number;
+				if (cut) {
+					next = Math.min(cut.top - nav, bottom); // haut de la 1re carte coupée
+				} else if (last < bottom - EDGE) {
+					// plus de carte coupée mais bas du bloc pas atteint (ex. « À propos »
+					// sans cartes, ou bas de bloc) : on pagine jusqu'à la fin
+					next = Math.min(bottom, last + (vh - nav));
+				} else {
+					break; // tout le bloc a été vu
+				}
+
 				if (next <= last + EDGE) {
-					// carte plus haute que l'écran : on avance d'un écran
+					// contenu plus haut que l'écran : on force un écran
 					next = Math.min(bottom, last + (vh - nav));
 					if (next <= last + EDGE) break;
 				}

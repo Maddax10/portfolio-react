@@ -21,6 +21,7 @@ export const Projects = () => {
 				<span className="section__index">02</span>
 				<h2 className="section__title">Projets</h2>
 				<p className="section__lead">Une sélection de réalisations récentes.</p>
+				{projectsStore.fallback && <span className="section__demo">Données de démonstration · API injoignable</span>}
 			</header>
 
 			<div className="projects__cards">

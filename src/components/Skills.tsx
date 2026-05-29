@@ -24,6 +24,7 @@ export const Skills = () => {
 				<span className="section__index">01</span>
 				<h2 className="section__title">Skills</h2>
 				<p className="section__lead">Les outils que je manie au quotidien.</p>
+				{skillStore.fallback && <span className="section__demo">Données de démonstration · API injoignable</span>}
 			</header>
 
 			<div className="skills__cards">

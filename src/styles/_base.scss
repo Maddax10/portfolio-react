@@ -50,6 +50,31 @@
 	max-width: 46ch;
 }
 
+.section__demo {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin-block-start: 1rem;
+	padding: 0.4rem 0.85rem;
+	font-family: 'Space Mono', monospace;
+	font-size: 0.72rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--amber-soft);
+	background: rgba(255, 166, 0, 0.1);
+	border: 1px solid rgba(255, 166, 0, 0.28);
+	border-radius: 999px;
+
+	&::before {
+		content: '';
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+		background: var(--amber);
+		box-shadow: 0 0 10px var(--amber);
+	}
+}
+
 //-------------------------------------------------- Boutons
 .btn {
 	display: inline-flex;

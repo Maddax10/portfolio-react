@@ -20,13 +20,33 @@ export function useSectionSnap(selector = '.intro, .section, .footer') {
 		if (sections.length === 0) return;
 
 		let locked = false;
-		let lockTimer: ReturnType<typeof setTimeout>;
+		let rafId = 0;
 
 		const scrollToPos = (top: number) => {
+			const fromY = window.scrollY;
+			const toY = Math.max(0, top);
+			const dist = toY - fromY;
+			cancelAnimationFrame(rafId);
+
+			if (reduce || Math.abs(dist) < 2) {
+				window.scrollTo(0, toY);
+				locked = false;
+				return;
+			}
+
 			locked = true;
-			window.scrollTo({ top: Math.max(0, top), behavior: reduce ? 'auto' : 'smooth' });
-			clearTimeout(lockTimer);
-			lockTimer = setTimeout(() => (locked = false), reduce ? 80 : 200);
+			// durée courte proportionnelle à la distance (rapide mais fluide)
+			const duration = Math.min(360, Math.max(160, Math.abs(dist) * 0.32));
+			const start = performance.now();
+			const ease = (t: number) => 1 - Math.pow(1 - t, 3); // easeOutCubic
+
+			const step = (now: number) => {
+				const t = Math.min(1, (now - start) / duration);
+				window.scrollTo(0, fromY + dist * ease(t));
+				if (t < 1) rafId = requestAnimationFrame(step);
+				else locked = false;
+			};
+			rafId = requestAnimationFrame(step);
 		};
 
 		const currentIndex = () => {
@@ -155,7 +175,7 @@ export function useSectionSnap(selector = '.intro, .section, .footer') {
 			window.removeEventListener('touchstart', onTouchStart);
 			window.removeEventListener('touchmove', onTouchMove);
 			window.removeEventListener('touchend', onTouchEnd);
-			clearTimeout(lockTimer);
+			cancelAnimationFrame(rafId);
 		};
 	}, [selector]);
 }

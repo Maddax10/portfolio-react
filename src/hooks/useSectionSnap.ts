@@ -1,104 +1,68 @@
 import { useEffect } from 'react';
 
 /**
- * Snap « franc » entre sections, piloté en JS.
+ * Snap « franc » paginé entre sections, piloté en JS.
  *
- * - Desktop : un cran de molette / une flèche saute à la section voisine.
- * - Mobile : un léger swipe du doigt saute à la section voisine (on neutralise
- *   l'inertie tactile native pour que ce soit net).
+ * - Bloc qui tient à l'écran : un scroll = saut au bloc voisin.
+ * - Bloc plus haut que l'écran : on avance par pas d'~1 écran jusqu'à la fin
+ *   du bloc, on s'y arrête, puis un nouveau scroll passe au bloc suivant.
  *
- * Sections plus hautes que l'écran : défilement libre à l'intérieur. Après
- * chaque défilement, un « settle » recale sur le bloc qui occupe le MILIEU de
- * l'écran (règle des 50 %), pour ne jamais rester coincé entre deux blocs.
+ * Fonctionne à la molette, au clavier et au doigt (le défilement natif est
+ * neutralisé pour que chaque geste donne un saut net).
  */
 export function useSectionSnap(selector = '.intro, .section, .footer') {
 	useEffect(() => {
-		const NAV = 0; // sections en min-height:100dvh, alignées plein écran
-		const EDGE = 6; // tolérance px pour détecter les bords
-		const SWIPE = 24; // distance px mini d'un swipe pour déclencher
+		const EDGE = 6; // tolérance px
+		const SWIPE = 24; // distance px mini d'un swipe
 		const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 		const sections = Array.from(document.querySelectorAll<HTMLElement>(selector));
 		if (sections.length === 0) return;
 
 		let locked = false;
-		let touching = false;
 		let lockTimer: ReturnType<typeof setTimeout>;
-		let settleTimer: ReturnType<typeof setTimeout>;
-
-		const lock = () => {
-			locked = true;
-			clearTimeout(lockTimer);
-			lockTimer = setTimeout(() => (locked = false), reduce ? 80 : 200);
-		};
 
 		const scrollToPos = (top: number) => {
-			lock();
+			locked = true;
 			window.scrollTo({ top: Math.max(0, top), behavior: reduce ? 'auto' : 'smooth' });
+			clearTimeout(lockTimer);
+			lockTimer = setTimeout(() => (locked = false), reduce ? 80 : 200);
 		};
 
 		const currentIndex = () => {
 			let idx = 0;
 			sections.forEach((s, i) => {
-				if (s.offsetTop - NAV <= window.scrollY + EDGE) idx = i;
+				if (s.offsetTop <= window.scrollY + EDGE) idx = i;
 			});
 			return idx;
 		};
 
-		const goTo = (i: number) => {
-			const target = sections[i];
-			if (target) scrollToPos(target.offsetTop - NAV);
-		};
-
-		// Saut autorisé dans cette direction ? (faux = défilement natif libre
-		// dans une section plus haute que l'écran)
-		const canJump = (dir: 1 | -1) => {
-			const sec = sections[currentIndex()];
-			if (sec.offsetHeight <= window.innerHeight + EDGE) return true;
-			const atTop = window.scrollY <= sec.offsetTop - NAV + EDGE;
-			const atBottom = window.scrollY + window.innerHeight >= sec.offsetTop + sec.offsetHeight - EDGE;
-			return dir > 0 ? atBottom : atTop;
-		};
-
-		const jump = (dir: 1 | -1) => goTo(currentIndex() + dir);
-
-		// Recale sur le bloc qui occupe le milieu de l'écran.
-		const settle = () => {
-			if (locked || touching) return;
+		const jump = (dir: 1 | -1) => {
+			if (locked) return;
 			const vh = window.innerHeight;
-			const mid = window.scrollY + vh / 2;
-
-			let idx = 0;
-			sections.forEach((s, i) => {
-				if (s.offsetTop <= mid) idx = i;
-			});
+			const idx = currentIndex();
 			const sec = sections[idx];
-			const alignedTop = Math.max(0, sec.offsetTop - NAV);
+			const top = sec.offsetTop;
+			const bottom = Math.max(top, sec.offsetTop + sec.offsetHeight - vh); // fin du bloc
+			const y = window.scrollY;
+			const STEP = vh * 0.9;
 
-			let dest: number;
-			if (sec.offsetHeight <= vh + EDGE) {
-				dest = alignedTop; // section qui tient : alignée en haut
+			if (dir > 0) {
+				// avance dans un bloc haut jusqu'à sa fin, sinon bloc suivant
+				if (bottom - y > EDGE) scrollToPos(Math.min(bottom, y + STEP));
+				else if (sections[idx + 1]) scrollToPos(sections[idx + 1].offsetTop);
 			} else {
-				// section trop haute : on borne dans sa plage lisible
-				const alignedBottom = sec.offsetTop + sec.offsetHeight - vh;
-				dest = Math.min(Math.max(window.scrollY, alignedTop), alignedBottom);
+				// remonte dans un bloc haut jusqu'à son début, sinon bloc précédent
+				if (y - top > EDGE) scrollToPos(Math.max(top, y - STEP));
+				else if (sections[idx - 1]) scrollToPos(sections[idx - 1].offsetTop);
 			}
-
-			if (Math.abs(dest - window.scrollY) > EDGE) scrollToPos(dest);
-		};
-
-		const onScroll = () => {
-			clearTimeout(settleTimer);
-			settleTimer = setTimeout(settle, 140);
 		};
 
 		//-------------------------------------------------- Molette (desktop)
 		const onWheel = (e: WheelEvent) => {
-			if (Math.abs(e.deltaY) <= Math.abs(e.deltaX) || Math.abs(e.deltaY) < 2) return;
-			const dir = e.deltaY > 0 ? 1 : -1;
-			if (!canJump(dir)) return;
+			if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return; // scroll horizontal
 			e.preventDefault();
-			if (!locked) jump(dir);
+			if (Math.abs(e.deltaY) >= 2) jump(e.deltaY > 0 ? 1 : -1);
 		};
 
 		//-------------------------------------------------- Clavier
@@ -106,43 +70,28 @@ export function useSectionSnap(selector = '.intro, .section, .footer') {
 			const tag = (e.target as HTMLElement)?.tagName;
 			if (tag === 'INPUT' || tag === 'TEXTAREA') return;
 			const dir = e.key === 'ArrowDown' || e.key === 'PageDown' ? 1 : e.key === 'ArrowUp' || e.key === 'PageUp' ? -1 : 0;
-			if (!dir || !canJump(dir as 1 | -1)) return;
+			if (!dir) return;
 			e.preventDefault();
-			if (!locked) jump(dir as 1 | -1);
+			jump(dir as 1 | -1);
 		};
 
 		//-------------------------------------------------- Tactile (mobile)
 		let startY = 0;
 		let lastY = 0;
-		let hijackDir: 1 | -1 | 0 = 0;
 
 		const onTouchStart = (e: TouchEvent) => {
-			touching = true;
 			startY = lastY = e.touches[0].clientY;
-			hijackDir = 0;
 		};
 
 		const onTouchMove = (e: TouchEvent) => {
-			const y = e.touches[0].clientY;
-			lastY = y;
-			const dir: 1 | -1 = startY - y > 0 ? 1 : -1; // swipe vers le haut = section suivante
-			if (locked) {
-				e.preventDefault();
-				return;
-			}
-			if (canJump(dir)) {
-				hijackDir = dir;
-				e.preventDefault();
-			} else {
-				hijackDir = 0;
-			}
+			if (e.touches.length !== 1) return; // laisse le pinch-zoom
+			lastY = e.touches[0].clientY;
+			e.preventDefault(); // neutralise le défilement natif
 		};
 
 		const onTouchEnd = () => {
-			touching = false;
-			if (!locked && hijackDir && Math.abs(startY - lastY) >= SWIPE) jump(hijackDir);
-			hijackDir = 0;
-			onScroll(); // déclenche un settle après l'inertie éventuelle
+			const delta = startY - lastY;
+			if (Math.abs(delta) >= SWIPE) jump(delta > 0 ? 1 : -1);
 		};
 
 		window.addEventListener('wheel', onWheel, { passive: false });
@@ -150,7 +99,6 @@ export function useSectionSnap(selector = '.intro, .section, .footer') {
 		window.addEventListener('touchstart', onTouchStart, { passive: true });
 		window.addEventListener('touchmove', onTouchMove, { passive: false });
 		window.addEventListener('touchend', onTouchEnd);
-		window.addEventListener('scroll', onScroll, { passive: true });
 
 		return () => {
 			window.removeEventListener('wheel', onWheel);
@@ -158,9 +106,7 @@ export function useSectionSnap(selector = '.intro, .section, .footer') {
 			window.removeEventListener('touchstart', onTouchStart);
 			window.removeEventListener('touchmove', onTouchMove);
 			window.removeEventListener('touchend', onTouchEnd);
-			window.removeEventListener('scroll', onScroll);
 			clearTimeout(lockTimer);
-			clearTimeout(settleTimer);
 		};
 	}, [selector]);
 }

@@ -4,6 +4,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+  align-items: center;
 	// max-width: var(--maxw);
 	margin-inline: auto;
 	padding: 7rem clamp(1.1rem, 5vw, 2.5rem) 4rem;
@@ -23,11 +24,7 @@
 	}
 
 	&__inner {
-		// max-width: min(100%, 680px);
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
+		max-width: min(100%, 680px);
 	}
 
 	&__eyebrow {

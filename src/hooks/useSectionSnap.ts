@@ -35,7 +35,9 @@ export function useSectionSnap(selector = '.intro, .section, .footer') {
 			const target = sections[i];
 			if (!target) return;
 			locked = true;
-			target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+			// Position explicite (= seuil de currentIndex) pour éviter tout
+			// décalage dû à l'interaction scroll-padding/scroll-margin.
+			window.scrollTo({ top: Math.max(0, target.offsetTop - NAV), behavior: reduce ? 'auto' : 'smooth' });
 			clearTimeout(lockTimer);
 			lockTimer = setTimeout(() => (locked = false), reduce ? 80 : 200);
 		};

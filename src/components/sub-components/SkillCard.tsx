@@ -1,32 +1,19 @@
-import { useEffect } from 'react';
 import type { Skill } from '../../stores/models/skill';
-/**
- * Création d'un type d'objet
- */
-/**
- * initialisation des propriétés de ma card
- */
-type Props = { skill: Skill };
+
+type Props = { skill: Skill; index?: number };
 
 /**
- *
- * @param props title:string | description:string | path:string | alt:string
+ * @param props skill | index (pour le décalage d'animation)
  * @returns html component
  */
-export function SkillCard(props: Props) {
-	const { skill } = props;
-
-	useEffect(() => {
-		// console.log('  SkillCard Sub-component');
-	}, []);
-
+export function SkillCard({ skill, index = 0 }: Props) {
 	return (
-		<div className="skill__card">
+		<div className="skill__card" style={{ animationDelay: `${index * 60}ms` }}>
 			<div className="skill__logo">
 				<img src={skill.image_path.toString()} alt={skill.name.toString()} />
 			</div>
 			<article className="skill__text">
-				<h1>{skill.name}</h1>
+				<h3>{skill.name}</h3>
 				<p>{skill.description}</p>
 			</article>
 		</div>

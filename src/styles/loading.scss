@@ -1,14 +1,35 @@
-@mixin card($color, $bgColor) {
-  color: $color;
-  background-color: $bgColor;
-  padding: 32px;
-  border-radius: 16px;
-  width: 100%;
+@mixin state-card($accent) {
+	grid-column: 1 / -1;
+	display: flex;
+	align-items: center;
+	gap: 0.85rem;
+	justify-content: center;
+	padding: 2rem;
+	width: 100%;
+	border-radius: var(--radius);
+	border: 1px solid var(--line);
+	background: var(--bg-card);
+	color: var(--ink-dim);
+	font-family: 'Space Mono', monospace;
+	font-size: 0.95rem;
+	letter-spacing: 0.04em;
+
+	&::before {
+		content: '';
+		width: 14px;
+		height: 14px;
+		border-radius: 50%;
+		background: $accent;
+		box-shadow: 0 0 12px $accent;
+		animation: pulse 1.4s ease-in-out infinite;
+	}
 }
 
 .loading {
-  @include card($white, $OP_white_90);
+	@include state-card(var(--amber));
 }
+
 .error {
-  @include card($red, $OP_red_90);
+	@include state-card(var(--ember));
+	color: #ff9a87;
 }

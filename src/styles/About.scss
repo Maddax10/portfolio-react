@@ -1,88 +1,110 @@
 .about {
-  background: $black;
-  padding-block: 1rem;
+	&__card {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: clamp(1.5rem, 4vw, 3rem);
+		align-items: center;
+		padding: clamp(1.5rem, 4vw, 2.75rem);
+		background: var(--bg-card);
+		border: 1px solid var(--line);
+		border-radius: var(--radius-lg);
+	}
 
-  &__card {
-    display: grid;
-    padding: 1rem;
-    margin-inline: 1rem;
-  }
-  //==================================================
-  //  Image
-  //==================================================
-  &__image {
-    transition: ease $transitionTime;
+	//-------------------------------------------------- Image
+	&__media {
+		display: flex;
+		justify-content: center;
+	}
 
-    display: grid;
-    position: relative;
-    border-radius: 100%;
-    box-shadow: 0 0 5px 2px $black, 0 0 0 5px $sunrise;
-    margin-block: 2rem;
-    border: 2px solid $black;
-    &:hover {
-      transform: translateY(3px);
-    }
-    img {
-      transition: ease $transitionTime;
+	&__image {
+		position: relative;
+		width: clamp(180px, 50vw, 240px);
+		aspect-ratio: 1;
+		border-radius: 50%;
+		padding: 6px;
+		background: var(--grad);
+		box-shadow: 0 24px 50px -20px rgba(255, 166, 0, 0.45);
+		transition: transform var(--t) var(--ease);
 
-      justify-self: center;
-      width: 100%;
-      border-radius: 100%;
-    }
-  }
-  &__imageOverlay {
-    transition: ease $transitionTime;
+		&:hover {
+			transform: translateY(-4px) rotate(-1.5deg);
+		}
 
-    position: absolute;
-    background-color: transparent;
-    width: 100%;
-    height: 100%;
-    border-radius: 100%;
-    &:hover {
-      backdrop-filter: blur(10px);
-    }
-  }
-  //==================================================
-  //  Title
-  //==================================================
-  &__title {
-    color: $sunrise;
-    text-align: center;
-    font-size: 3rem;
-  }
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			border-radius: 50%;
+			border: 4px solid var(--bg-card);
+		}
+	}
 
-  &__description {
-    color: $OP_white_60;
-    text-align: justify;
-    justify-self: center;
-  }
-  &__little {
-    font-style: italic;
-    font-size: 0.7rem;
-  }
-  &__personalTxt {
-    display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
-  }
+	&__imageOverlay {
+		position: absolute;
+		inset: 6px;
+		border-radius: 50%;
+		background: radial-gradient(circle at 30% 25%, transparent 55%, rgba(10, 9, 8, 0.35));
+		pointer-events: none;
+	}
+
+	//-------------------------------------------------- Contenu
+	&__name {
+		font-size: clamp(1.8rem, 5vw, 2.6rem);
+		color: var(--amber);
+		margin-block-end: 1.1rem;
+	}
+
+	&__personalTxt {
+		display: flex;
+		flex-direction: column;
+		gap: 0.7rem;
+		color: var(--ink-dim);
+		font-size: 1.05rem;
+		line-height: 1.6;
+	}
+
+	&__little {
+		font-style: italic;
+		color: var(--ink-faint);
+		font-size: 0.85rem;
+	}
+
+	//-------------------------------------------------- Faits
+	&__facts {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin-block-start: 1.75rem;
+
+		li {
+			flex: 1 1 110px;
+			display: flex;
+			flex-direction: column;
+			gap: 0.15rem;
+			padding: 0.9rem 1.1rem;
+			background: var(--surface);
+			border: 1px solid var(--line);
+			border-radius: 14px;
+		}
+
+		strong {
+			font-family: 'Syne', sans-serif;
+			font-size: 1.35rem;
+			color: var(--ink);
+		}
+
+		span {
+			font-family: 'Space Mono', monospace;
+			font-size: 0.75rem;
+			letter-spacing: 0.08em;
+			color: var(--ink-faint);
+			text-transform: uppercase;
+		}
+	}
 }
 
-/*
-Desktop
-*/
-@media (min-width: $mobile) {
-  .about {
-    display: flex;
-    &__card {
-      width: 100%;
-    }
-    &__image {
-      max-width: 200px;
-      margin: 2rem;
-    }
-    &__description {
-      display: flex;
-      align-items: center;
-    }
-  }
+@media (min-width: 800px) {
+	.about__card {
+		grid-template-columns: minmax(220px, 280px) 1fr;
+	}
 }

@@ -5,17 +5,20 @@ import { Projects } from "./components/Projects";
 import "./App.css";
 import { About } from "./components/About";
 import { Footer } from "./components/Footer";
-// import { Contact } from "./components/Contact";
+import { useReveal } from "./hooks/useReveal";
 
 const App = () => {
+  useReveal();
+
   return (
     <>
       <NavBar />
-      <Intro />
-      <Skills />
-      <Projects />
-      <About />
-      {/* <Contact /> */}
+      <main>
+        <Intro />
+        <Skills />
+        <Projects />
+        <About />
+      </main>
       <Footer />
     </>
   );

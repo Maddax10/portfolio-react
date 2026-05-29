@@ -1,5 +1,6 @@
 @use './_variables' as *;
 @import '_normalize.scss';
+@import '_base.scss';
 @import 'NavBar.scss';
 @import 'Intro.scss';
 @import 'Skills.scss';

@@ -1,64 +1,79 @@
 .skills {
-  background-color: $L_black_10;
-  padding: $skillsPadding;
-  width: 100%;
-  display: grid;
-  &__title {
-    color: $sunrise;
-    padding-block: 1rem;
-    font-size: 3rem;
-    text-align: center;
-  }
-  &__cards {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: $skillsGap;
-    padding-block-end: 1rem;
-    flex-flow: wrap;
-  }
+	&__cards {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+		gap: 1rem;
+	}
 }
+
 .skill {
-  &__card {
-    transition: ease $transitionTime;
-    display: flex;
-    align-items: center;
-    background-color: $L_black_15;
-    color: $white;
-    max-width: calc($mobile/2) - $skillsCardsPadding;
-    width: 100%;
-    height: 100px;
-    border-radius: 1rem;
+	&__card {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		padding: 0.9rem;
+		background: var(--bg-card);
+		border: 1px solid var(--line);
+		border-radius: var(--radius);
+		min-height: 104px;
+		overflow: hidden;
+		transition: transform var(--t) var(--ease), border-color var(--t), box-shadow var(--t);
+		animation: cardIn 0.6s var(--ease) both;
 
-    &:hover {
-      box-shadow: inset 0 0 3px 1px $L_black_25, 0 0 16px 1px $black;
-      transform: translateY(-3px);
-    }
-  }
-  &__text {
-    padding-inline-start: 1rem;
-    h1 {
-      margin-block-end: 0.35rem;
-      font-size: 1.5rem;
-    }
-    p {
-      color: $OP_white_60;
-      padding-inline-start: 0.2rem;
-      margin-block-end: 0.2rem;
-    }
-  }
-  &__logo {
-    display: flex;
-    align-items: center;
-    background-color: $L_black_5;
-    padding-inline: 1rem;
-    height: 100%;
-    aspect-ratio: 1/1;
-    //75% du border-radius de ma "__skillCard"
-    border-radius: 0.75rem 0 0 0.75rem;
+		&:hover {
+			transform: translateY(-4px);
+			border-color: rgba(255, 166, 0, 0.4);
+			box-shadow: 0 20px 40px -22px rgba(255, 166, 0, 0.45);
 
-    img {
-      width: 100%;
-    }
-  }
+			.skill__logo {
+				border-color: rgba(255, 166, 0, 0.4);
+			}
+		}
+	}
+
+	&__logo {
+		flex: 0 0 auto;
+		display: grid;
+		place-items: center;
+		width: 70px;
+		height: 70px;
+		padding: 14px;
+		background: var(--surface);
+		border: 1px solid var(--line);
+		border-radius: 14px;
+		transition: border-color var(--t);
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+		}
+	}
+
+	&__text {
+		min-width: 0;
+
+		h3 {
+			font-family: 'Syne', sans-serif;
+			font-size: 1.2rem;
+			margin-block-end: 0.25rem;
+		}
+
+		p {
+			color: var(--ink-dim);
+			font-size: 0.92rem;
+			line-height: 1.45;
+		}
+	}
+}
+
+@keyframes cardIn {
+	from {
+		opacity: 0;
+		transform: translateY(24px);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
 }

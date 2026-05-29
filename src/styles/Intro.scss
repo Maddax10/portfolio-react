@@ -1,38 +1,180 @@
 .intro {
-  height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  justify-self: center;
+	position: relative;
+	min-height: 100dvh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	max-width: var(--maxw);
+	margin-inline: auto;
+	padding: 7rem clamp(1.1rem, 5vw, 2.5rem) 4rem;
+	overflow: hidden;
 
-  width: 100%;
+	//-------------------------------------------------- Lignes décoratives
+	&__grid {
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		background-image:
+			linear-gradient(to right, var(--line) 1px, transparent 1px),
+			linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+		background-size: clamp(60px, 10vw, 120px) clamp(60px, 10vw, 120px);
+		mask-image: radial-gradient(120% 90% at 70% 30%, #000 30%, transparent 80%);
+		-webkit-mask-image: radial-gradient(120% 90% at 70% 30%, #000 30%, transparent 80%);
+	}
 
-  h1 {
-    text-align: center;
-    font-size: 3rem;
-    color: $white;
+	&__inner {
+		max-width: 22ch;
+	}
 
-    span {
-      background: linear-gradient(135deg, $sunrise, $red);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      -webkit-text-fill-color: transparent;
-    }
-  }
-  :nth-child(2) {
-    color: $white;
-    opacity: 50%;
-  }
+	&__eyebrow {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.55rem;
+		font-family: 'Space Mono', monospace;
+		font-size: 0.82rem;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--ink-dim);
+		margin-block-end: 1.5rem;
+		opacity: 0;
+		animation: heroUp 0.8s var(--ease) 0.1s forwards;
+	}
+
+	&__dot {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		background: var(--amber);
+		box-shadow: 0 0 12px var(--amber);
+		animation: pulse 2s ease-in-out infinite;
+	}
+
+	&__title {
+		font-size: clamp(3.2rem, 16vw, 9rem);
+		font-weight: 800;
+		line-height: 0.92;
+		letter-spacing: -0.03em;
+	}
+
+	&__line {
+		display: block;
+		opacity: 0;
+		transform: translateY(40px);
+		animation: heroUp 0.9s var(--ease) forwards;
+
+		&:nth-child(1) {
+			animation-delay: 0.2s;
+		}
+		&:nth-child(2) {
+			animation-delay: 0.34s;
+		}
+	}
+
+	&__accent {
+		background: var(--grad);
+		background-size: 200% 200%;
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+		-webkit-text-fill-color: transparent;
+		animation: heroUp 0.9s var(--ease) 0.34s forwards, shimmer 6s ease infinite;
+	}
+
+	&__sub {
+		font-size: clamp(1.1rem, 2.6vw, 1.45rem);
+		color: var(--ink-dim);
+		margin-block-start: 1.75rem;
+		max-width: 38ch;
+		opacity: 0;
+		animation: heroUp 0.8s var(--ease) 0.5s forwards;
+
+		em {
+			font-style: italic;
+			color: var(--ink);
+			font-weight: 600;
+		}
+	}
+
+	&__cta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.85rem;
+		margin-block-start: 2.25rem;
+		opacity: 0;
+		animation: heroUp 0.8s var(--ease) 0.62s forwards;
+	}
+
+	//-------------------------------------------------- Cue de scroll
+	&__scroll {
+		position: absolute;
+		bottom: 2rem;
+		left: 50%;
+		transform: translateX(-50%);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.6rem;
+		font-family: 'Space Mono', monospace;
+		font-size: 0.72rem;
+		letter-spacing: 0.25em;
+		text-transform: uppercase;
+		color: var(--ink-faint);
+		opacity: 0;
+		animation: heroUp 0.8s var(--ease) 0.8s forwards;
+	}
+
+	&__scrollLine {
+		width: 1px;
+		height: 42px;
+		background: linear-gradient(to bottom, var(--amber), transparent);
+		animation: scrollLine 1.8s ease-in-out infinite;
+	}
 }
-@media (min-width: $mobile) {
-  .intro {
-    h1 {
-      font-size: 5rem;
-    }
-    p {
-      font-size: 2rem;
-    }
-  }
+
+@keyframes heroUp {
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@keyframes shimmer {
+	0%,
+	100% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+}
+
+@keyframes pulse {
+	0%,
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+	50% {
+		opacity: 0.5;
+		transform: scale(0.8);
+	}
+}
+
+@keyframes scrollLine {
+	0% {
+		transform: scaleY(0);
+		transform-origin: top;
+	}
+	45% {
+		transform: scaleY(1);
+		transform-origin: top;
+	}
+	55% {
+		transform: scaleY(1);
+		transform-origin: bottom;
+	}
+	100% {
+		transform: scaleY(0);
+		transform-origin: bottom;
+	}
 }

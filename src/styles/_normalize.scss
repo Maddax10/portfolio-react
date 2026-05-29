@@ -45,8 +45,11 @@
 
 html {
 	scroll-behavior: smooth;
-	scroll-padding-top: 120px;
+	scroll-padding-top: 90px;
 	-webkit-font-smoothing: antialiased;
+	// Snap doux : un petit scroll fait accrocher la section suivante,
+	// sans piéger les sections plus hautes que l'écran (proximity).
+	scroll-snap-type: y proximity;
 }
 
 body {

@@ -49,24 +49,31 @@ export function useSectionSnap(selector = '.intro, .section, .footer') {
 			if (bottom - top <= EDGE) return [top]; // bloc qui tient à l'écran
 
 			const nav = navOffset();
-			const cand = [top];
-			sec.querySelectorAll<HTMLElement>('[data-snap-item]').forEach((el) => {
-				// position qui place le haut de la carte juste SOUS la nav fixe
-				const t = el.getBoundingClientRect().top + window.scrollY - nav;
-				if (t > top + EDGE && t < bottom - EDGE) cand.push(t);
-			});
-			cand.push(bottom);
-			cand.sort((a, b) => a - b);
+			const items = Array.from(sec.querySelectorAll<HTMLElement>('[data-snap-item]'))
+				.map((el) => {
+					const r = el.getBoundingClientRect();
+					return { top: r.top + window.scrollY, bottom: r.bottom + window.scrollY };
+				})
+				.sort((a, b) => a.top - b.top);
 
-			// Avance gloutonne : le plus loin possible (≤ 1 écran) en
-			// s'alignant sur un haut de carte, sans sauter de contenu.
+			// À chaque arrêt, le prochain ancrage = le haut de la PREMIÈRE carte
+			// non entièrement visible (coupée en bas), placée juste sous la nav.
+			// Aucune carte n'est sautée : chacune devient pleinement visible.
 			const stops = [top];
-			while (stops[stops.length - 1] < bottom - EDGE) {
+			for (let guard = 0; guard < 100; guard++) {
 				const last = stops[stops.length - 1];
-				let next = last;
-				for (const c of cand) if (c > last + EDGE && c <= last + vh + EDGE) next = c;
-				if (next === last) next = Math.min(bottom, last + vh); // gros écart : pas forcé
+				const viewportBottom = last + vh;
+				const cut = items.find((it) => it.bottom > viewportBottom + EDGE);
+				if (!cut) break; // tout le reste tient dans l'écran
+
+				let next = Math.min(cut.top - nav, bottom);
+				if (next <= last + EDGE) {
+					// carte plus haute que l'écran : on avance d'un écran
+					next = Math.min(bottom, last + (vh - nav));
+					if (next <= last + EDGE) break;
+				}
 				stops.push(next);
+				if (next >= bottom - EDGE) break;
 			}
 			return stops;
 		};
